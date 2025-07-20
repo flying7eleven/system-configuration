@@ -1,0 +1,308 @@
+#########################################################
+# WARNING: This file is manged by an Ansible playbook.  #
+#          Do not edit it manually!                     #
+#########################################################
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+set $menu wmenu-run
+set $output-primary DP-1
+set $output-secondary DP-3
+
+### Output configuration
+
+# Orientation of the monitors
+output $output-primary resolution 2560x1440 position 0 0
+output $output-secondary resolution 2560x1440 position 2560 0
+
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+# output * bg /home/tjanke/.config/sway/wallpaper_firewatch_004.jpg fill
+output $output-primary bg /home/tjanke/.config/sway/wallpaper_firewatch_004.jpg fill
+output $output-secondary bg /home/tjanke/.config/sway/wallpaper_firewatch_001.jpg fill
+
+### Idle configuration
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+input type:keyboard {
+   xkb_layout de
+}
+# bindsym $mod+0 input type:keyboard xkb_switch_layout next
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+c kill
+
+    # Start your launcher
+    bindsym $mod+e exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+Ctrl+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    #
+    set $ws-primary-terminal "1: "
+    set $ws-browser "2: "
+    set $ws-dev-1 "3: ???"
+    set $ws-dev-2 "4: ???"
+    set $ws-steam "8: ???"
+    set $ws-music "9: "
+
+    # Switch to workspace
+    bindsym $mod+1 workspace $ws-primary-terminal
+    bindsym $mod+2 workspace $ws-browser
+    bindsym $mod+3 workspace $ws-dev-1
+    bindsym $mod+4 workspace $ws-dev-2
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number $ws-steam
+    bindsym $mod+9 workspace number $ws-music
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace $ws-primary-terminal
+    bindsym $mod+Shift+2 move container to workspace $ws-browser
+    bindsym $mod+Shift+3 move container to workspace $ws-dev-1
+    bindsym $mod+Shift+4 move container to workspace $ws-dev-2
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace $ws-steam
+    bindsym $mod+Shift+9 move container to workspace $ws-music
+
+    # assign workspaces to specific outputs
+    workspace $ws-primary-terminal output $output-primary
+    workspace $ws-browser output $output-secondary
+    workspace $ws-dev-1 output $output-primary
+    workspace $ws-dev-2 output $output-secondary
+    workspace 5 output $output-primary
+    workspace 6 output $output-primary
+    workspace 7 output $output-primary
+    workspace $ws-steam output $output-secondary
+    workspace $ws-music output $output-secondary
+
+   # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    # bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+#
+# Utilities:
+#
+    # Special keys to adjust volume via PulseAudio
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    # Special keys to adjust brightness via brightnessctl
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    # Special key to take a screenshot with grim
+    bindsym Print exec grim
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    swaybar_command waybar
+    # position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    # status_command while date +'%Y-%m-%d %T'; do sleep 1; done
+
+    # colors {
+    #     statusline #ffffff
+    #     background #323232
+    #     inactive_workspace #32323200 #32323200 #5c5c5c
+    # }
+}
+
+# for_window [class=".*] border pixel 1
+default_border none
+	for_window [app_id="Alacritty"] border pixel 1
+
+	# postfix all X11 apps with XWayland
+	for_window [shell="xwayland"] title_format "%title [XWayland]"
+
+# assign specific programs to specific workspaces
+assign [app_id="Alacritty"] workspace $ws-primary-terminal
+assign [app_id="firefox"] workspace $ws-browser
+assign [class="Spotify"] workspace $ws-music
+assign [class="jetbrains-rustrover"] workspace $ws-dev-1
+assign [class="jetbrains-pycharm"] workspace $ws-dev-1
+assign [class="jetbrains-clion"] workspace $ws-dev-1
+assign [class="jetbrains-datagrip"] workspace $ws-dev-2
+
+#
+for_window [class="vlc"] floating enable
+for_window [class="SpeedCrunch"] floating enable
+for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating enable, resize set width 500px, resize set height 600px, move right 0
+
+# Notification windows (based on role/type)
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+
+#
+#for_window [app_id="firefox" title="^Picture-in-Picture$"] $popup
+
+# Open/Save dialogs should be floating too
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
+
+# game configurations
+for_window [class="steam"] workspace $ws-steam, floating enabled, max_render_time off, blur disabled
+for_window [instance="steamwebhelper"] workspace $ws-steam, floating enable, max_render_time off, blur disabled
+for_window [class="steam_app_1086940"] inhibit_idle focus, floating enable, move to output $output-primary # Baldur's Gate 3
+for_window [class="dwarfort"] inhibit_idle focus, floating enabled, move to output $output-primary # Dwarf Fortress
+for_window [class="fw.x86_64"] inhibit_idle focus, floating enabled, move to output $output-primary # Firewatch
+for_window [class="factorio"] inhibit_idle focus, floating enabled, move to output $output-primary # Factorio
+for_window [class="FTL.amd64"] inhibit_idle focus, floating enabled, move to output $output-primary # FTL: Faster Then Light
+for_window [class="Graveyard Keeper.x86_64"] inhibit_idle focus, floating enabled,  move to output $output-primary # Graveyard Keeper
+for_window [title="^Necesse v\..*"] inhibit_idle focus, floating enabled, move to output $output-primary # Necesse
+for_window [class="OxygenNotIncluded"] inhibit_idle focus, floating enabled, move to output $output-primary # Oxygen Not Included
+# Path of Exile 2
+for_window [class="ProjectHospital.x86_64"] inhibit_idle focus, floating enabled, move to output $output-primary # Project Hospital
+for_window [class="Project Zomboid"] inhibit_idle focus, floating enabled, move to output $output-primary # Project Zomboid
+for_window [class="RimWorldLinux"] inhibit_idle focus, floating enabled, move to output $output-primary # RimWorld
+# Civilization VII
+for_window [class="valheim.x86_64"] inhibit_idle focus, floating enabled, move to output $output-primary # Valheim
+
+
+exec nextcloud
+exec $HOME/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
+
+
+include /etc/sway/config.d/*

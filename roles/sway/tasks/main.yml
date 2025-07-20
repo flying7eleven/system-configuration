@@ -1,0 +1,20 @@
+---
+- name: Ensure the directory for the configuration file exists
+  ansible.builtin.file:
+    path: "~/.config/sway"
+    state: directory
+    mode: u=rwx,g=rx,o=
+
+- name: Copy wallpapers to the configuration directory
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/.config/sway/"
+    mode: '0644'
+  with_fileglob:
+    - "files/*.jpg"
+
+- name: Generating configuration file
+  ansible.builtin.template:
+    src: "templates/config.j2"
+    dest: "~/.config/sway/config"
+    mode: u=rw,g=r,o=
