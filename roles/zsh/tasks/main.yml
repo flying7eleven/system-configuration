@@ -1,0 +1,6 @@
+---
+- name: Generating configuration file
+  ansible.builtin.template:
+    src: "templates/zshrc.j2"
+    dest: "~/.zshrc"
+    mode: u=rw,g=r,o=
