@@ -24,16 +24,22 @@ HIST_STAMPS="dd.mm.yyyy"
 
 # plugins to load
 plugins=(
+{% if ansible_system == "Darwin" %}
     1password
+{% endif %}
     ansible
+{% if ansible_system == "Darwin" %}
     brew
+{% endif %}
     command-not-found
     direnv
     docker
     docker-compose
     fzf
     git
+{% if ansible_system == "Darwin" %}
     macos
+{% endif %}
     nmap
     python
     tig
@@ -63,6 +69,7 @@ alias tigger="tig --all"
 # FIX for commit signing
 export GPG_TTY=$(tty)
 
+{% if ansible_system == "Darwin" %}
 # configure the scripts which are able to get the corresponding entries from the installed password manager
 export ANSIBLE_VAULT_PASSWORD_FILE=$HOME/.ansible_vault_pass.sh
 export ANSIBLE_BECOME_PASSWORD_FILE=$HOME/.ansible_become_pass.sh
@@ -78,3 +85,4 @@ export NVM_DIR="$HOME/.nvm"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+{% endif %}
