@@ -1,0 +1,12 @@
+{% if ansible_system == "Darwin" %}
+# ensure the brew gnu find utils are used since they are newer than the macOS ones
+export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+
+# ensure the compiler will use the downloaded libpq version
+export LDFLAGS="-L/opt/homebrew/opt/libpq/lib $LDFLAGS"
+export CPPFLAGS="-I/opt/homebrew/opt/libpq/include $CPPFLAGS"
+export RUSTFLAGS="-L/opt/homebrew/opt/libpq/lib $RUSTFLAGS"
+
+# set the correct kerberos user globally
+export KERBEROS_USER={{ zsh_kerberos_username }}
+{% endif %}

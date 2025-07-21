@@ -1,0 +1,1 @@
+zsh_kerberos_username: "{{ vault_zsh_kerberos_username }}"
