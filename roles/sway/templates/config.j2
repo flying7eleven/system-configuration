@@ -240,56 +240,30 @@ default_border none
 	# postfix all X11 apps with XWayland
 	for_window [shell="xwayland"] title_format "%title [XWayland]"
 
-# assign specific programs to specific workspaces
-assign [app_id="Alacritty"] workspace $ws-primary-terminal
-assign [app_id="firefox"] workspace $ws-browser
-assign [class="Spotify"] workspace $ws-music
-assign [class="jetbrains-rustrover"] workspace $ws-dev-1
-assign [class="jetbrains-pycharm"] workspace $ws-dev-1
-assign [class="jetbrains-clion"] workspace $ws-dev-1
-assign [class="jetbrains-datagrip"] workspace $ws-dev-2
+# the window rules defined for native wayland applications
+{% for rule in sway_wayland_window_rules %}
+for_window [app_id="{{ rule.app_id }}"] {{ rule.flags | join(', ') }} # {{ rule.name }}
+{% endfor %}
+#for_window [app_id="firefox" title="^Picture-in-Picture$"] $popup
 
-#
-for_window [class="vlc"] floating enable
-for_window [class="SpeedCrunch"] floating enable
-for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating enable, resize set width 500px, resize set height 600px, move right 0
+# the window rules defined for X11 applications
+{% for rule in sway_x11_window_rules %}
+for_window [{% if 'class' in rule %}class="{{ rule['class'] }}"{% elif 'instance' in rule %}instance="{{ rule['instance'] }}"{% endif %}] {{ rule.flags | join(', ') }} # {{ rule.name }}
+{% endfor %}
+for_window [title="^Necesse v\..*"] inhibit_idle focus, floating enabled, move to output $output-primary # Necesse
+# Path of Exile 2
+# Civilization VII
 
-# Notification windows (based on role/type)
+# notification windows (based on role/type)
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="dialog"] floating enable
 for_window [window_type="dialog"] floating enable
 
-#
-#for_window [app_id="firefox" title="^Picture-in-Picture$"] $popup
-
 # Open/Save dialogs should be floating too
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
 
-# game configurations
-for_window [class="steam"] workspace $ws-steam, floating enabled, max_render_time off, blur disabled
-for_window [instance="steamwebhelper"] workspace $ws-steam, floating enable, max_render_time off, blur disabled
-for_window [class="steam_app_1086940"] inhibit_idle focus, floating enable, move to output $output-primary # Baldur's Gate 3
-for_window [class="dwarfort"] inhibit_idle focus, floating enabled, move to output $output-primary # Dwarf Fortress
-for_window [class="fw.x86_64"] inhibit_idle focus, floating enabled, move to output $output-primary # Firewatch
-for_window [class="factorio"] inhibit_idle focus, floating enabled, move to output $output-primary # Factorio
-for_window [class="FTL.amd64"] inhibit_idle focus, floating enabled, move to output $output-primary # FTL: Faster Then Light
-for_window [class="Graveyard Keeper.x86_64"] inhibit_idle focus, floating enabled,  move to output $output-primary # Graveyard Keeper
-for_window [title="^Necesse v\..*"] inhibit_idle focus, floating enabled, move to output $output-primary # Necesse
-for_window [class="OxygenNotIncluded"] inhibit_idle focus, floating enabled, move to output $output-primary # Oxygen Not Included
-# Path of Exile 2
-for_window [class="ProjectHospital.x86_64"] inhibit_idle focus, floating enabled, move to output $output-primary # Project Hospital
-for_window [class="Project Zomboid"] inhibit_idle focus, floating enabled, move to output $output-primary # Project Zomboid
-for_window [class="RimWorldLinux"] inhibit_idle focus, floating enabled, move to output $output-primary # RimWorld
-# Civilization VII
-for_window [class="valheim.x86_64"] inhibit_idle focus, floating enabled, move to output $output-primary # Valheim
-for_window [class="steam_app_3184110"] inhibit_idle focus, floating enabled, move to output $output-primary # Widget Inc.
-# for_window [class="Stardeus"] inhibit_idle focus, floating enabled, move to output $output-primary # Stardeus
-for_window [app_id="adelie"] inhibit_idle focus, floating enabled, max_render_time off, blur disabled # Adelié Watschel Editor or Games
-
-
 exec nextcloud
 exec $HOME/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
-
 
 include /etc/sway/config.d/*

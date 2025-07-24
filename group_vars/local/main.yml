@@ -1,1 +1,195 @@
 zsh_kerberos_username: "{{ vault_zsh_kerberos_username }}"
+
+sway_wayland_window_rules:
+  - name: "Adlié-based applications"
+    app_id: "adelie"
+    flags:
+      - max_render_time off
+      - blur disabled
+      -
+  - name: "NextCloud Desktop Client"
+    app_id: "com.nextcloud.desktopclient.nextcloud"
+    flags:
+      - floating enabled
+      - resize set width 500px
+      - resize set height 600px
+      - move right 0
+
+  - name: "Alacritty Terminal Emulator"
+    app_id: "Alacritty"
+    flags:
+      - workspace $ws-primary-terminal
+
+  - name: "Firefox Browser"
+    app_id: "firefox"
+    flags:
+      - workspace $ws-browser
+
+sway_x11_window_rules:
+  - name: "Video LAN Client"
+    class: "vlc"
+    flags:
+      - floating enabled
+
+  - name: "Steam Webbrowser"
+    instance: "steamwebhelper"
+    flags:
+      - workspace $ws-steam
+      - floating enabled
+      - max_render_time off
+      - blur disabled
+
+  - name: "Spotify"
+    class: "Spotify"
+    flags:
+      - workspace $ws-music
+
+  - name: "RustRover IDE"
+    class: "jetbrains-rustrover"
+    flags:
+      - workspace $ws-dev-1
+
+  - name: "PyCharm IDE"
+    class: "jetbrains-pycharm"
+    flags:
+      - workspace$ws-dev-1
+
+  - name: "CLion IDE"
+    class: "jetbrains-clion"
+    flags:
+      - workspace $ws-dev-1
+
+  - name: "DataGrip IDE"
+    class: "jetbrains-datagrip"
+    flags:
+      - workspace $ws-dev-2
+
+  - name: "SpeedCrunch"
+    class: "SpeedCrunch"
+    flags:
+      - floating enable
+
+  - name: "Steam Client"
+    class: "steam"
+    flags:
+      - workspace $ws-steam
+      - floating enabled
+      - max_render_time off
+      - blur disabled
+
+  - name: "Baldur's Gate 3"
+    class: "steam_app_1086940"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Widget Inc."
+    class: "steam_app_3184110"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Dwarf Fortress"
+    class: "dwarfort"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Firewatch"
+    class: "fw.x86_64"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Factorio"
+    class: "factorio"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "FTL: Faster Then Light"
+    class: "FTL.amd64"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Graveyard Keeper"
+    class: "Graveyard Keeper.x86_64"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Oxygen Not Included"
+    class: "OxygenNotIncluded"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Project Hospital"
+    class: "ProjectHospital.x86_64"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Project Zomboid"
+    class: "Project Zomboid"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Rim World"
+    class: "RimWorldLinux"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Valheim"
+    class: "valheim.x86_64"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
+
+  - name: "Stardeus"
+    class: "Stardeus"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move to output $output-primary
+      - blur disabled
