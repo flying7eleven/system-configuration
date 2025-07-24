@@ -1,8 +1,5 @@
 ---
 - hosts: local
-  vars_files:
-    - roles/zsh/vars/main.yml
-    - roles/zsh/vars/vault.yml
   roles:
     - { role: sway, when: ansible_os_family != 'Darwin', tags: ["sway"] }
     - { role: zsh, tags: ["zsh"] }
