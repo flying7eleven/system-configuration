@@ -16,3 +16,7 @@
     src: "templates/tmux.conf.j2"
     dest: "~/.tmux.conf"
     mode: u=rw,g=r,o=
+    owner: "{{ item }}"
+    group: "{{ item }}"
+  become: yes
+  loop: "{{ users_to_configure }}"
