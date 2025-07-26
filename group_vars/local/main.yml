@@ -73,7 +73,8 @@ sway_x11_window_rules:
     class: "steam"
     flags:
       - workspace $ws-steam
-      - floating enabled
+      - floating disable
+      - fullscreen enable
       - max_render_time off
       - blur disabled
 
