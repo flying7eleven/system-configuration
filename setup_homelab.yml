@@ -1,0 +1,6 @@
+---
+- hosts: homelab
+  roles:
+    - { role: zsh, tags: ["zsh"] }
+    - { role: tmux, tags: ["tmux"] }
+    - { role: vim, tags: ["vim"] }
