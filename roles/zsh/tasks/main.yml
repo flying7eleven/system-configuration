@@ -14,25 +14,46 @@
 - name: Getting or updating oh-my-zsh.
   ansible.builtin.git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: ~/.oh-my-zsh
+    dest: "/home/{{ item }}/.oh-my-zsh"
     update: yes
     accept_hostkey: yes
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
 
 - name: Getting or updating zsh-autosuggestions.
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     update: yes
     accept_hostkey: yes
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
 
 - name: Generating .zshrc
   ansible.builtin.template:
     src: "templates/zshrc.j2"
-    dest: "~/.zshrc"
+    dest: "/home/{{ item }}/.zshrc"
     mode: u=rw,g=r,o=
+    owner: "{{ item }}"
+    group: "{{ item }}"
+  become: yes
+  loop: "{{ users_to_configure }}"
 
 - name: Generating .profile
   ansible.builtin.template:
     src: "templates/profile.j2"
-    dest: "~/.profile"
+    dest: "/home/{{ item }}/.profile"
     mode: u=rw,g=r,o=
+    owner: "{{ item }}"
+    group: "{{ item }}"
+  become: yes
+  loop: "{{ users_to_configure }}"
+
+- name: Set default shell for each user.
+  ansible.builtin.user:
+    name: "{{ item }}"
+    shell: /bin/zsh
+  loop: "{{ users_to_configure }}"
+  become: yes
