@@ -1,3 +1,4 @@
+users_to_configure: "{{ vault_users_to_configure }}"
 zsh_kerberos_username: "{{ vault_zsh_kerberos_username }}"
 
 sway_wayland_window_rules:
