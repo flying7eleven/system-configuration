@@ -11,3 +11,4 @@
     - git
     - zsh
     - fzf
+    - direnv

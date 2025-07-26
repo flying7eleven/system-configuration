@@ -6,3 +6,4 @@
     - git
     - zsh
     - fzf
+    - direnv
