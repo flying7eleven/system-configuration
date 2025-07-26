@@ -1,0 +1,4 @@
+- name: Ensure tmux is installed on the computer.
+  ansible.builtin.homebrew:
+    name: tmux
+    state: present

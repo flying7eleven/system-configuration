@@ -1,0 +1,18 @@
+---
+- name: Running Debian specific setup
+  include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Running Arch Linux specific setup
+  include_tasks: setup-Arch.yml
+  when: ansible_os_family == 'Archlinux'
+
+- name: Running macOS specific setup
+  include_tasks: setup-macOS.yml
+  when: ansible_os_family == 'Darwin'
+
+- name: Generating .tmux.conf
+  ansible.builtin.template:
+    src: "templates/tmux.conf.j2"
+    dest: "~/.tmux.conf"
+    mode: u=rw,g=r,o=

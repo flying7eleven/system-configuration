@@ -3,3 +3,4 @@
   roles:
     - { role: sway, when: ansible_os_family != 'Darwin', tags: ["sway"] }
     - { role: zsh, tags: ["zsh"] }
+    - { role: tmux, tags: ["tmux"] }
