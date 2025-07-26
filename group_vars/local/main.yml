@@ -87,6 +87,15 @@ sway_x11_window_rules:
       - move window to output $output-primary
       - blur disabled
 
+  - name: "The King is Watching"
+    class: "steam_app_2753900"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move window to output $output-primary
+      - blur disabled
+
   - name: "Widget Inc."
     class: "steam_app_3184110"
     flags:
