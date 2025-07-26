@@ -12,16 +12,26 @@
   when: ansible_os_family == 'Darwin'
 
 - name: Ensure that the directories for the vim configuration exists
-  with_items:
-    - ~/.vim
-    - ~/.vim/bundle
-  file: path={{ item }} state=directory
+  file:
+    path: "/home/{{ item }}/.vim/bundle"
+    state: directory
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ item }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
 
 - name: Install .vimrc file to the home directory
   ansible.builtin.template:
     src: "templates/vimrc.j2"
     dest: "~/.vimrc"
-    mode: u=rw,g=r,o=
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ item }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
 
 - name: Get the Vundle.vim plugin
   ansible.builtin.git:
@@ -29,6 +39,12 @@
     dest: ~/.vim/bundle/Vundle.vim
     update: yes
     accept_hostkey: yes
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
 
 - name: Ensure all plugins are installed...
   command: vim +PluginInstall +qall
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
