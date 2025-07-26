@@ -1,4 +1,30 @@
 ---
+- name: Running Debian specific setup
+  include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Running Arch Linux specific setup
+  include_tasks: setup-Arch.yml
+  when: ansible_os_family == 'Archlinux'
+
+- name: Running macOS specific setup
+  include_tasks: setup-macOS.yml
+  when: ansible_os_family == 'Darwin'
+
+- name: Getting or updating oh-my-zsh.
+  ansible.builtin.git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: ~/.oh-my-zsh
+    update: yes
+    accept_hostkey: yes
+
+- name: Getting or updating zsh-autosuggestions.
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    update: yes
+    accept_hostkey: yes
+
 - name: Generating .zshrc
   ansible.builtin.template:
     src: "templates/zshrc.j2"

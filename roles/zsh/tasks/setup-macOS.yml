@@ -1,0 +1,7 @@
+- name: Ensure zsh is installed on the computer.
+  ansible.builtin.homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - zsh
