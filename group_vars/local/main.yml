@@ -13,7 +13,7 @@ sway_wayland_window_rules:
       - floating enabled
       - resize set width 500px
       - resize set height 600px
-      - move right 0
+      - move window position 80 ppt 0 ppt
 
   - name: "Alacritty Terminal Emulator"
     app_id: "Alacritty"
