@@ -1,0 +1,8 @@
+- name: Ensure vim is installed on the computer.
+  ansible.builtin.homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - vim
+    - ctags

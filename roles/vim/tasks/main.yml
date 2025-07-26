@@ -1,0 +1,34 @@
+---
+- name: Running Debian specific setup
+  include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Running Arch Linux specific setup
+  include_tasks: setup-Arch.yml
+  when: ansible_os_family == 'Archlinux'
+
+- name: Running macOS specific setup
+  include_tasks: setup-macOS.yml
+  when: ansible_os_family == 'Darwin'
+
+- name: Ensure that the directories for the vim configuration exists
+  with_items:
+    - ~/.vim
+    - ~/.vim/bundle
+  file: path={{ item }} state=directory
+
+- name: Install .vimrc file to the home directory
+  ansible.builtin.template:
+    src: "templates/vimrc.j2"
+    dest: "~/.vimrc"
+    mode: u=rw,g=r,o=
+
+- name: Get the Vundle.vim plugin
+  ansible.builtin.git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: ~/.vim/bundle/Vundle.vim
+    update: yes
+    accept_hostkey: yes
+
+- name: Ensure all plugins are installed...
+  command: vim +PluginInstall +qall

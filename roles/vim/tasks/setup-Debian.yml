@@ -1,0 +1,13 @@
+- name: Ensure the acl package is included to be able to let Ansible get an unprivileged user.
+  ansible.builtin.apt:
+    name: acl
+    state: present
+
+- name: Ensure vim is installed on the computer.
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - vim
+    - ctags
