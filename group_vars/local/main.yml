@@ -83,7 +83,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Widget Inc."
@@ -92,7 +92,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Dwarf Fortress"
@@ -101,7 +101,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Firewatch"
@@ -110,7 +110,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Factorio"
@@ -119,7 +119,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "FTL: Faster Then Light"
@@ -128,7 +128,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Graveyard Keeper"
@@ -137,7 +137,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Oxygen Not Included"
@@ -146,7 +146,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Project Hospital"
@@ -155,7 +155,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Project Zomboid"
@@ -164,7 +164,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Rim World"
@@ -173,7 +173,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Valheim"
@@ -182,7 +182,7 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
 
   - name: "Stardeus"
@@ -191,5 +191,5 @@ sway_x11_window_rules:
       - inhibit_idle focus
       - floating enable
       - max_render_time off
-      - move to output $output-primary
+      - move window to output $output-primary
       - blur disabled
