@@ -32,6 +32,14 @@ sway_x11_window_rules:
     flags:
       - floating enabled
 
+  - name: "JetBrains Toolbox"
+    class: "jetbrains-toolbox"
+    flags:
+      - floating enabled
+      - resize set width 500px
+      - resize set height 600px
+      - move window position 80 ppt 0 ppt
+
   - name: "Steam Webbrowser"
     instance: "steamwebhelper"
     flags:
