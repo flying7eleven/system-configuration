@@ -13,11 +13,11 @@
 
 - name: Ensure that the directories for the vim configuration exists
   file:
-    path: "/home/{{ item }}/.vim/bundle"
+    path: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.vim/bundle"
     state: directory
     mode: u=rwx,g=rx,o=
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
   become: yes
   become_user: "{{ item }}"
   loop: "{{ users_to_configure }}"
@@ -28,7 +28,7 @@
     dest: "~/.vimrc"
     mode: u=rwx,g=rx,o=
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
   become: yes
   become_user: "{{ item }}"
   loop: "{{ users_to_configure }}"
