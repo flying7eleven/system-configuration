@@ -14,7 +14,7 @@
 - name: Getting or updating oh-my-zsh.
   ansible.builtin.git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: "/home/{{ item }}/.oh-my-zsh"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.oh-my-zsh"
     update: yes
     accept_hostkey: yes
   become: yes
@@ -24,7 +24,7 @@
 - name: Getting or updating zsh-autosuggestions.
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: "/home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     update: yes
     accept_hostkey: yes
   become: yes
@@ -34,26 +34,35 @@
 - name: Generating .zshrc
   ansible.builtin.template:
     src: "templates/zshrc.j2"
-    dest: "/home/{{ item }}/.zshrc"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.zshrc"
     mode: u=rw,g=r,o=
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
   become: yes
   loop: "{{ users_to_configure }}"
 
 - name: Generating .profile
   ansible.builtin.template:
     src: "templates/profile.j2"
-    dest: "/home/{{ item }}/.profile"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.profile"
     mode: u=rw,g=r,o=
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
   become: yes
   loop: "{{ users_to_configure }}"
 
-- name: Set default shell for each user.
+- name: Set default shell for each user (macOS).
+  ansible.builtin.user:
+    name: "{{ item }}"
+    shell: /opt/homebrew/bin/zsh
+  loop: "{{ users_to_configure }}"
+  become: yes
+  when: ansible_os_family == 'Darwin'
+
+- name: Set default shell for each user (Linux).
   ansible.builtin.user:
     name: "{{ item }}"
     shell: /bin/zsh
   loop: "{{ users_to_configure }}"
   become: yes
+  when: ansible_os_family != 'Darwin'
