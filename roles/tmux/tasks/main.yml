@@ -1,22 +1,64 @@
 ---
-- name: Running Debian specific setup
+- name: Running Debian specific setup.
   include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Running Arch Linux specific setup
+- name: Running Arch Linux specific setup.
   include_tasks: setup-Arch.yml
   when: ansible_os_family == 'Archlinux'
 
-- name: Running macOS specific setup
+- name: Running macOS specific setup.
   include_tasks: setup-macOS.yml
   when: ansible_os_family == 'Darwin'
 
-- name: Generating .tmux.conf
+- name: Generating .tmux.conf.
   ansible.builtin.template:
     src: "templates/tmux.conf.j2"
-    dest: "~/.tmux.conf"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.tmux.conf"
     mode: u=rw,g=r,o=
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
   become: yes
+  loop: "{{ users_to_configure }}"
+
+- name: Ensure that the directories for the tmux themes exists.
+  file:
+    path: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.tmux/themes"
+    state: directory
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Installing the catppuccin theme.
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/tmux.git
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.tmux/themes/catppuccin"
+    update: yes
+    accept_hostkey: yes
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Installing the tmux plugin manager.
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.tmux/tpm"
+    update: yes
+    accept_hostkey: yes
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Install the configured plugins via TPM.
+  shell: |
+    tmux new-session -d -s install_tmux_plugins "/bin/bash -c '~/.tmux/tpm/bin/install_plugins && exit'"
+  environment:
+    TERM: xterm-256color
+  args:
+    creates: "~/.tmux/plugins"
+  become: yes
+  become_user: "{{ item }}"
   loop: "{{ users_to_configure }}"
