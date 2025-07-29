@@ -56,15 +56,17 @@ source $ZSH/oh-my-zsh.sh
 # source the login configuration into each new shell
 source ~/.profile
 
-# some useful aliases
-alias gap="clear && git add -p"
-alias gcp="clear && git checkout -p"
-alias gits="clear && git status"
-alias glook="clear && git log --graph --pretty=tformat:'%Cred%h%Creset (%Cgreen%cd%Creset, %C(bold blue)%an%Creset): %s%C(yellow)%d%Creset' --date=format:'%d.%m. %H%M' --abbrev-commit"
-alias groot="cd `git rev-parse --show-toplevel`"
-alias la="clear && ls -lha"
-alias ll="clear && ls -lh"
-alias tigger="tig --all"
+{% if zsh_aliases is defined and zsh_aliases|length > 0 %}
+####################################################################################
+################################## useful aliases ##################################
+####################################################################################
+
+{% for alias in zsh_aliases %}
+# {{ alias.name }}
+alias {{ alias.alias }}="{{ alias.command }}"
+
+{% endfor %}
+{% endif %}
 
 # FIX for commit signing
 export GPG_TTY=$(tty)
