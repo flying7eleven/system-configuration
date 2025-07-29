@@ -14,7 +14,7 @@
 - name: Getting or updating oh-my-zsh.
   ansible.builtin.git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.oh-my-zsh"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.oh-my-zsh"
     update: yes
     accept_hostkey: yes
   become: yes
@@ -24,7 +24,7 @@
 - name: Getting or updating zsh-autosuggestions.
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     update: yes
     accept_hostkey: yes
   become: yes
@@ -34,7 +34,7 @@
 - name: Generating .zshrc
   ansible.builtin.template:
     src: "templates/zshrc.j2"
-    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.zshrc"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.zshrc"
     mode: u=rw,g=r,o=
     owner: "{{ item }}"
     group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
@@ -44,7 +44,7 @@
 - name: Generating .profile
   ansible.builtin.template:
     src: "templates/profile.j2"
-    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/{{ item }}/.profile"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.profile"
     mode: u=rw,g=r,o=
     owner: "{{ item }}"
     group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
