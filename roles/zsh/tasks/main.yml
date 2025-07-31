@@ -31,6 +31,17 @@
   become_user: "{{ item }}"
   loop: "{{ users_to_configure }}"
 
+- name: Getting or updating zsh-sdkman.
+  ansible.builtin.git:
+    repo: https://github.com/matthieusb/zsh-sdkman.git
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.oh-my-zsh/custom/plugins/zsh-sdkman"
+    update: yes
+    accept_hostkey: yes
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+  when: zsh_enable_sdkman_support
+
 - name: Generating .zshrc
   ansible.builtin.template:
     src: "templates/zshrc.j2"

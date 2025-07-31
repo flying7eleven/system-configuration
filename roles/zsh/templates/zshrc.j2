@@ -40,6 +40,9 @@ plugins=(
 {% if ansible_system == "Darwin" %}
     macos
 {% endif %}
+{% if zsh_enable_sdkman_support %}
+    zsh-sdkman
+{% endif %}
     nmap
     python
     tig
@@ -84,11 +87,5 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-{% endif %}
-
-{% if zsh_enable_sdkman_support %}
-# SDKMAN
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 {% endif %}
 {% endif %}
