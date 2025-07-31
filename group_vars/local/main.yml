@@ -245,3 +245,6 @@ zsh_aliases:
   - name: "Show the regular unstaged changes for the repository in the current directory"
     alias: "gd"
     command: "git diff"
+
+zsh_enable_sdkman_support: True
+zsh_enable_nvm_support: True

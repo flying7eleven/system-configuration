@@ -79,12 +79,16 @@ export ANSIBLE_BECOME_PASSWORD_FILE=$HOME/.ansible_become_pass.sh
 #
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-#
+{% if zsh_enable_nvm_support %}
+# Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+{% endif %}
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+{% if zsh_enable_sdkman_support %}
+# SDKMAN
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+{% endif %}
 {% endif %}
