@@ -40,13 +40,14 @@ plugins=(
 {% if ansible_system == "Darwin" %}
     macos
 {% endif %}
-{% if zsh_enable_sdkman_support %}
-    zsh-sdkman
-{% endif %}
     nmap
     python
     tig
     tmux
+{% if zsh_enable_sdkman_support %}
+    zsh-sdkman
+{% endif %}
+    zsh-autosuggestions
 )
 
 # include the actual oh-my-zsh stuff
