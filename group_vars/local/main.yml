@@ -6,6 +6,8 @@ sway_wayland_window_rules:
     app_id: "adelie"
     flags:
       - max_render_time off
+      - floating enabled
+      - move window to output $output-primary
       - blur disabled
 
   - name: "NextCloud Desktop Client"
