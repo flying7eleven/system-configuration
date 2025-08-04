@@ -26,6 +26,11 @@ sway_wayland_window_rules:
     flags:
       - workspace $ws-browser
 
+  - name: "Valve GameScope Wrapper for Games"
+    app_id: "gamescope"
+    flags:
+      - move window to output $output-primary
+
 sway_x11_window_rules:
   - name: "Video LAN Client"
     class: "vlc"
