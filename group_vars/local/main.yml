@@ -226,6 +226,10 @@ zsh_aliases:
     alias: "gits"
     command: "git status"
 
+  - name: "Show the content of the last commit"
+    alias: "gshow"
+    command: "git show -w --word-diff"
+
   - name: "Show a simplified look view of the repository in the current directory"
     alias: "glook"
     command: "git log --graph --pretty=tformat:'%Cred%h%Creset (%Cgreen%cd%Creset, %C(bold blue)%an%Creset): %s%C(yellow)%d%Creset' --date=format:'%d.%m. %H%M' --abbrev-commit"
@@ -240,7 +244,7 @@ zsh_aliases:
 
   - name: "Show the unstaged changes without whitespaces for the repository in the current directory"
     alias: "gdw"
-    command: "git diff -w"
+    command: "git diff -w --word-diff"
 
   - name: "Show the regular unstaged changes for the repository in the current directory"
     alias: "gd"
