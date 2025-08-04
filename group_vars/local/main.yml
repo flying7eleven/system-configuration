@@ -7,7 +7,7 @@ sway_wayland_window_rules:
     flags:
       - max_render_time off
       - blur disabled
-      -
+
   - name: "NextCloud Desktop Client"
     app_id: "com.nextcloud.desktopclient.nextcloud"
     flags:
