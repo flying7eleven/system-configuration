@@ -72,6 +72,22 @@
   become: yes
   loop: "{{ users_to_configure }}"
 
+- name: Install a custom font-configuration for emoji support (Arch Linux).
+  ansible.builtin.copy:
+    src: files/noto-color-emoji.xml
+    dest: /usr/share/fontconfig/conf.avail/99-noto-color-emoji.conf
+    mode: u=rw,g=r,o=r
+  become: yes
+  when: ansible_os_family == 'Archlinux'
+
+- name: Enable the custom font-configuration for emoji support (Arch Linux).
+  ansible.builtin.file:
+    src: ../conf.avail/99-noto-color-emoji.conf
+    dest: /usr/share/fontconfig/conf.default/99-noto-color-emoji.conf
+    state: link
+  become: yes
+  when: ansible_os_family == 'Archlinux'
+
 - name: Set default shell for each user (macOS).
   ansible.builtin.user:
     name: "{{ item }}"

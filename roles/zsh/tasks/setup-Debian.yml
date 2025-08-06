@@ -4,7 +4,7 @@
     name: acl
     state: present
 
-- name: Ensure zsh is installed on the computer.
+- name: Ensure zsh and some requirements are installed on the computer.
   become: yes
   ansible.builtin.apt:
     name: "{{ item }}"
