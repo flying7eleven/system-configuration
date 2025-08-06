@@ -76,6 +76,15 @@ alias {{ alias.alias }}="{{ alias.command }}"
 # FIX for commit signing
 export GPG_TTY=$(tty)
 
+{% if zsh_start_tmux_on_shell_init is defined and zsh_start_tmux_on_shell_init %}
+####################################################################################
+############################# start tmux automatically #############################
+####################################################################################
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux new-session -A -s main
+fi
+{% endif %}
+
 {% if ansible_system == "Darwin" %}
 # configure the scripts which are able to get the corresponding entries from the installed password manager
 export ANSIBLE_VAULT_PASSWORD_FILE=$HOME/.ansible_vault_pass.sh
