@@ -14,3 +14,4 @@
     - direnv
     - fontconfig
     - noto-fonts-emoji
+    - tig
