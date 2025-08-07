@@ -28,7 +28,7 @@ sway_wayland_window_rules:
     flags:
       - workspace $ws-browser
 
-  - name: "Valve GameScope Wrapper for Games"
+  - name: "Valve GameScope Wrapper for Games (use in Steam: gamescope -f -w 2560 -h 1440 --force-grab-cursor -- %command%)"
     app_id: "gamescope"
     flags:
       - move window to output $output-primary
