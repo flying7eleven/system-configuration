@@ -1,0 +1,12 @@
+- name: Ensure the acl package is included to be able to let Ansible get an unprivileged user.
+  ansible.builtin.pacman:
+    name: acl
+    state: present
+
+- name: Ensure alacritty and some other dependencies are installed on the computer.
+  ansible.builtin.pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - alacritty
+    - ttf-jetbrains-mono

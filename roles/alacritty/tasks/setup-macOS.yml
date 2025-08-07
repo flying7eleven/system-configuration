@@ -1,0 +1,6 @@
+- name: Ensure some alacritty dependencies are installed on the computer (NOT alacritty itself).
+  ansible.builtin.homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - font-jetbrains-mono

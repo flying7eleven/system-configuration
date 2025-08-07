@@ -1,3 +1,8 @@
+#########################################################
+# WARNING: This file is manged by an Ansible playbook.  #
+#          Do not edit it manually!                     #
+#########################################################
+
 {% if ansible_system == "Darwin" %}
 # ensure the brew gnu find utils are used since they are newer than the macOS ones
 export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
