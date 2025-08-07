@@ -4,6 +4,7 @@
     state: present
 
 - name: Ensure alacritty and some other dependencies are installed on the computer.
+  become: yes
   ansible.builtin.pacman:
     name: "{{ item }}"
     state: present
