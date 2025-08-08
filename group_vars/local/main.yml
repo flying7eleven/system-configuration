@@ -94,8 +94,22 @@ sway_x11_window_rules:
       - max_render_time off
       - blur disabled
 
+  - name: "Paradox Launcher"
+    class: "Paradox Launcher"
+    flags:
+      - floating enabled
+
   - name: "Baldur's Gate 3"
     class: "steam_app_1086940"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move window to output $output-primary
+      - blur disabled
+
+  - name: "Victoria 3"
+    class: "victoria3"
     flags:
       - inhibit_idle focus
       - floating enable
