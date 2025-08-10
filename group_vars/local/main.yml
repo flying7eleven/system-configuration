@@ -180,6 +180,15 @@ sway_x11_window_rules:
       - move window to output $output-primary
       - blur disabled
 
+  - name: "Terra Nil"
+    class: "Terra Nil.x86_64"
+    flags:
+      - inhibit_idle focus
+      - floating enable
+      - max_render_time off
+      - move window to output $output-primary
+      - blur disabled
+
   - name: "Graveyard Keeper"
     class: "Graveyard Keeper.x86_64"
     flags:
