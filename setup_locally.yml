@@ -3,6 +3,7 @@
   roles:
     - { role: alacritty, tags: ["alacritty"] }
     - { role: sway, when: ansible_os_family != 'Darwin', tags: ["sway"] }
+    - { role: wireplumber, when: ansible_os_family != 'Darwin', tags: [ "wireplumber" ] }
     - { role: tmux, tags: ["tmux"] }
     - { role: vim, tags: ["vim"] }
     - { role: zsh, tags: ["zsh"] }
