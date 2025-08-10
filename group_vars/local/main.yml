@@ -269,6 +269,34 @@ wireplumber_audio_rules:
     app_name: "FMOD Ex App"
     volume: 0.091829
 
+  - description: "Path of Exile and Path of Exile II"
+    app_name: "PathOfExileSteam.exe"
+    volume: 0.066369
+
+  - description: "Potion Craft"
+    app_name: "Potion Craft.exe"
+    volume: 0.045247
+
+  - description: "Sir Woopass"
+    app_name: "Sir Whoopass.exe"
+    volume: 0.073419
+
+  - description: "I am Future"
+    app_name: "I Am Future.exe"
+    volume: 0.091504
+
+  - description: "Oxygen not Included, and other games"
+    app_name: "FMOD Audio"
+    volume: 0.022630
+
+  - description: "Baldur's Gate 3, and other games"
+    app_name: " "
+    volume: 0.127500
+
+  - description: "The King is Watching"
+    app_name: "The king is watching"
+    volume: 0.170609
+
   - description: "Firefox Browser"
     app_name: "Firefox"
     volume: 0.1
