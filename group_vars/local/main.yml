@@ -252,6 +252,27 @@ sway_x11_window_rules:
       - move window to output $output-primary
       - blur disabled
 
+wireplumber_audio_rules:
+  - description: "Diablo IV"
+    app_name: "Diablo IV"
+    volume: 0.048483
+
+  - description: "Fallout 76"
+    app_name: "Fallout 76"
+    volume: 0.120154
+
+  - description: "World of Warcraft"
+    app_name: "World of Warcraft"
+    volume: 0.070622
+
+  - description: "RimWorld, Terra Nile, and other games"
+    app_name: "FMOD Ex App"
+    volume: 0.091829
+
+  - description: "Firefox Browser"
+    app_name: "Firefox"
+    volume: 0.1
+
 zsh_aliases:
   - name: "Add (part of) files to the git staging area"
     alias: "gap"
