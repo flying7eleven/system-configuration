@@ -262,6 +262,11 @@ for_window [{% if 'class' in rule %}class="{{ rule['class'] }}"{% elif 'instance
 for_window [title="^Necesse v\..*"] inhibit_idle focus, floating enabled, move to output $output-primary
 # Path of Exile 2
 # Civilization VII
+# Battle.net Launcher
+for_window [title="^Battle\.net$"] inhibit_idle focus, floating enable, max_render_time off, move window to output $output-primary, blur disabled, border pixel 0, move position center
+for_window [title="^Battle\.net Login$"] inhibit_idle focus, floating enable, max_render_time off, move window to output $output-primary, blur disabled, border pixel 0, move position center
+# World of Warcraft
+for_window [title="^World of Warcraft$"] inhibit_idle focus, floating enable, max_render_time off, move window to output $output-primary, blur disabled
 
 #############################################
 # notification windows (based on role/type) #
