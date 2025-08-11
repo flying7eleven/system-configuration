@@ -37,7 +37,7 @@
   ansible.builtin.git:
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: ~/.vim/bundle/Vundle.vim
-    update: yes
+    update: no
     accept_hostkey: yes
   become: yes
   become_user: "{{ item }}"
