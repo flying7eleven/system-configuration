@@ -234,6 +234,13 @@ sway_x11_window_rules:
       - move window to output $output-primary
       - blur disabled
 
+  - name: "CurseForge"
+    class: "CurseForge"
+    flags:
+      - floating enable
+      - move window to output $output-primary
+      - blur disabled
+
   - name: "Valheim"
     class: "valheim.x86_64"
     flags:
