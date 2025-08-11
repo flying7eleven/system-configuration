@@ -1,9 +1,11 @@
 - name: Ensure the acl package is included to be able to let Ansible get an unprivileged user.
+  become: yes
   ansible.builtin.pacman:
     name: acl
     state: present
 
 - name: Ensure tmux is installed on the computer.
+  become: yes
   ansible.builtin.pacman:
     name: tmux
     state: present
