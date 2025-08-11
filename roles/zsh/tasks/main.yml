@@ -50,7 +50,9 @@
   become: yes
   become_user: "{{ item }}"
   loop: "{{ users_to_configure }}"
-  when: zsh_enable_sdkman_support
+  when:
+    - zsh_enable_sdkman_support is defined
+    - zsh_enable_sdkman_support == true
 
 - name: Generating .zshrc
   ansible.builtin.template:
