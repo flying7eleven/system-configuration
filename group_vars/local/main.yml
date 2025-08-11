@@ -270,7 +270,7 @@ wireplumber_audio_rules:
 
   - description: "World of Warcraft"
     app_name: "World of Warcraft"
-    volume: 0.070622
+    volume: 0.026861
 
   - description: "RimWorld, Terra Nile, and other games"
     app_name: "FMOD Ex App"
