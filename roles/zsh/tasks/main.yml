@@ -15,7 +15,7 @@
   ansible.builtin.git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
     dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.oh-my-zsh"
-    update: yes
+    update: no
     accept_hostkey: yes
   become: yes
   become_user: "{{ item }}"
