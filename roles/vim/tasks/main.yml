@@ -13,7 +13,7 @@
 
 - name: Ensure that the directories for the vim configuration exists
   file:
-    path: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.vim/bundle"
+    path: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.vim/bundle"
     state: directory
     mode: u=rwx,g=rx,o=
     owner: "{{ item }}"
