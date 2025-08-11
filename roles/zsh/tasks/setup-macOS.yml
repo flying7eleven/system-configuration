@@ -3,8 +3,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - git
-    - zsh
-    - fzf
     - direnv
+    - fzf
+    - git
     - tig
+    - zsh

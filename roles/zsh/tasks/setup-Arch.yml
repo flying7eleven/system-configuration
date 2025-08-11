@@ -8,10 +8,10 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - git
-    - zsh
-    - fzf
     - direnv
     - fontconfig
+    - fzf
+    - git
     - noto-fonts-emoji
     - tig
+    - zsh
