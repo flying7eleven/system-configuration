@@ -37,12 +37,16 @@ sway_wayland_window_rules:
     app_id: "wow.exe"
     flags:
       - move window to output $output-primary
+      - floating enabled
+      - blur disabled
 
   - name: "Battle.net Launcher (using Faugus Launcher with enabled Wayland support)"
     app_id: "battle.net.exe"
     flags:
       - workspace $ws-steam
       - floating enabled
+      - fullscreen disabled
+      - blur disabled
 
 sway_x11_window_rules:
   - name: "Video LAN Client"
@@ -63,7 +67,6 @@ sway_x11_window_rules:
     flags:
       - workspace $ws-steam
       - floating enabled
-      - max_render_time off
       - blur disabled
 
   - name: "Spotify"
@@ -194,9 +197,7 @@ sway_x11_window_rules:
   - name: "Terra Nil"
     class: "Terra Nil.x86_64"
     flags:
-      - inhibit_idle focus
       - floating enable
-      - max_render_time off
       - move window to output $output-primary
       - blur disabled
 
