@@ -33,20 +33,6 @@ sway_wayland_window_rules:
     flags:
       - move window to output $output-primary
 
-  - name: "World of Warcraft (using Faugus Launcher with enabled Wayland support)"
-    app_id: "wow.exe"
-    flags:
-      - move window to output $output-primary
-      - floating enabled
-      - blur disabled
-
-  - name: "Battle.net Launcher (using Faugus Launcher with enabled Wayland support)"
-    app_id: "battle.net.exe"
-    flags:
-      - floating enabled
-      - resize set 90ppt 90ppt
-      - move position center
-
 sway_x11_window_rules:
   - name: "Video LAN Client"
     class: "vlc"

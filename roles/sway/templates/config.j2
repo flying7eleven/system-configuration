@@ -263,10 +263,10 @@ for_window [title="^Necesse v\..*"] inhibit_idle focus, floating enabled, move t
 # Path of Exile 2
 # Civilization VII
 # Battle.net Launcher
-for_window [title="^Battle\.net$"] inhibit_idle focus, floating enable, max_render_time off, move window to output $output-primary, blur disabled, border pixel 0, move position center
-for_window [title="^Battle\.net Login$"] inhibit_idle focus, floating enable, max_render_time off, move window to output $output-primary, blur disabled, border pixel 0, move position center
+for_window [title="^Battle\.net$"] floating enable, resize set 90ppt 90ppt, move position center
+for_window [title="^Battle\.net Login$"] floating enable, resize set 30ppt 40ppt, move position center
 # World of Warcraft
-for_window [title="^World of Warcraft$"] inhibit_idle focus, floating enable, max_render_time off, move window to output $output-primary, blur disabled
+for_window [title="^World of Warcraft$"] inhibit_idle focus, floating enable, move window to output $output-primary
 # Merge window for JetBrains IDEs
 for_window [class="^jetbrains.*" title="^Merge Revisions.*"] floating enable, resize set 80ppt 80ppt, move position center
 # Steam Friends List
