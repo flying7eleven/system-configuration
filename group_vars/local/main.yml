@@ -43,10 +43,9 @@ sway_wayland_window_rules:
   - name: "Battle.net Launcher (using Faugus Launcher with enabled Wayland support)"
     app_id: "battle.net.exe"
     flags:
-      - workspace $ws-steam
       - floating enabled
-      - fullscreen disabled
-      - blur disabled
+      - resize set 90ppt 90ppt
+      - move position center
 
 sway_x11_window_rules:
   - name: "Video LAN Client"
@@ -67,7 +66,6 @@ sway_x11_window_rules:
     flags:
       - workspace $ws-steam
       - floating enabled
-      - blur disabled
 
   - name: "Spotify"
     class: "Spotify"
@@ -83,10 +81,7 @@ sway_x11_window_rules:
     class: "steam"
     flags:
       - workspace $ws-steam
-      - floating disable
-      - fullscreen enable
-      - max_render_time off
-      - blur disabled
+      - floating enabled
 
   - name: "Paradox Launcher"
     class: "Paradox Launcher"
