@@ -74,26 +74,6 @@ sway_x11_window_rules:
     flags:
       - workspace $ws-music
 
-  - name: "RustRover IDE"
-    class: "jetbrains-rustrover"
-    flags:
-      - workspace $ws-dev-1
-
-  - name: "PyCharm IDE"
-    class: "jetbrains-pycharm"
-    flags:
-      - workspace$ws-dev-1
-
-  - name: "CLion IDE"
-    class: "jetbrains-clion"
-    flags:
-      - workspace $ws-dev-1
-
-  - name: "DataGrip IDE"
-    class: "jetbrains-datagrip"
-    flags:
-      - workspace $ws-dev-2
-
   - name: "SpeedCrunch"
     class: "SpeedCrunch"
     flags:

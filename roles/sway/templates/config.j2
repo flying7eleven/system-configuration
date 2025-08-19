@@ -267,6 +267,8 @@ for_window [title="^Battle\.net$"] inhibit_idle focus, floating enable, max_rend
 for_window [title="^Battle\.net Login$"] inhibit_idle focus, floating enable, max_render_time off, move window to output $output-primary, blur disabled, border pixel 0, move position center
 # World of Warcraft
 for_window [title="^World of Warcraft$"] inhibit_idle focus, floating enable, max_render_time off, move window to output $output-primary, blur disabled
+# Merge window for JetBrains IDEs
+for_window [class="^jetbrains.*" title="^Merge Revisions.*"] floating enable, resize set 80ppt 80ppt, move position center
 
 #############################################
 # notification windows (based on role/type) #
