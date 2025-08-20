@@ -7,5 +7,6 @@
     - direnv
     - fzf
     - git
+    - soundanchor
     - tig
     - zsh
