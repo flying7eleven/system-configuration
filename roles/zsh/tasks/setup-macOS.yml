@@ -9,4 +9,5 @@
     - git
     - soundanchor
     - tig
+    - wget
     - zsh

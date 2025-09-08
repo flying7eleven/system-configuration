@@ -17,4 +17,5 @@
     - git
     - noto-fonts-emoji
     - tig
+    - wget
     - zsh

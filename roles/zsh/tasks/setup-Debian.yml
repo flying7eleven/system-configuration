@@ -15,4 +15,5 @@
     - fzf
     - git
     - tig
+    - wget
     - zsh
