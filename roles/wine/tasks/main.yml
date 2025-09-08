@@ -1,0 +1,4 @@
+---
+- name: Running Arch Linux specific setup.
+  include_tasks: setup-Arch.yml
+  when: ansible_os_family == 'Archlinux'

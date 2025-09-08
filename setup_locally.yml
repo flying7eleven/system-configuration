@@ -5,6 +5,7 @@
     - { role: llm, when: ansible_os_family == 'Darwin', tags: ["llm"] }
     - { role: sway, when: ansible_os_family != 'Darwin', tags: ["sway"] }
     - { role: wireplumber, when: ansible_os_family != 'Darwin', tags: [ "wireplumber" ] }
+    - { role: wine, when: ansible_os_family == 'Archlinux', tags: [ "wine" ] }
     - { role: tmux, tags: ["tmux"] }
     - { role: vim, tags: ["vim"] }
     - { role: zsh, tags: ["zsh"] }

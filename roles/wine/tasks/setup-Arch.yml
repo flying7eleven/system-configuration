@@ -1,0 +1,17 @@
+- name: Ensure the acl package is included to be able to let Ansible get an unprivileged user.
+  become: yes
+  ansible.builtin.pacman:
+    name: acl
+    state: present
+
+- name: Ensure wine and some requirements are installed on the computer.
+  become: yes
+  ansible.builtin.pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - wine-staging
+    - vkd3d
+    - winetricks
+    - wine-gecko
+    - wine-mono
