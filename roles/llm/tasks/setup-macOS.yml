@@ -3,6 +3,11 @@
     name: claude-code
     state: present
 
+- name: Ensure Google Gemini CLI is installed on the computer.
+  ansible.builtin.homebrew:
+    name: gemini-cli
+    state: present
+
 - name: Ensure OpenAI codex is installed on the computer.
   ansible.builtin.homebrew:
     name: codex
