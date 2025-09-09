@@ -320,7 +320,7 @@ zsh_aliases:
 
 zsh_enable_sdkman_support: True
 zsh_enable_nvm_support: True
-zsh_start_tmux_on_shell_init: True
+zsh_start_tmux_on_shell_init: False
 
 alacritty_theme: "catppuccin/catppuccin-macchiato"
 alacritty_font_size: 14.0
