@@ -90,6 +90,9 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE=$HOME/.ansible_vault_pass.sh
 export ANSIBLE_BECOME_PASSWORD_FILE=$HOME/.ansible_become_pass.sh
 
+# ensure we know where to find the installed Vulkan layers
+export VK_LAYER_PATH=/opt/homebrew/opt/vulkan-profiles/share/vulkan/explicit_layer.d
+
 #
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
