@@ -2,3 +2,8 @@
   ansible.builtin.homebrew:
     name: claude-code
     state: present
+
+- name: Ensure OpenAI codex is installed on the computer.
+  ansible.builtin.homebrew:
+    name: codex
+    state: present

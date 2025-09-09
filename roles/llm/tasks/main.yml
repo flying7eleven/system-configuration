@@ -12,3 +12,24 @@
     group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
   become: yes
   loop: "{{ users_to_configure }}"
+
+- name: Ensure that the directories for the OpenAI Codex configuration exists.
+  file:
+    path: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.codex"
+    state: directory
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Generating OpenAI Codex configuration.
+  ansible.builtin.template:
+    src: "templates/codex.json.j2"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.codex/config.json"
+    mode: u=rw,g=r,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  loop: "{{ users_to_configure }}"
