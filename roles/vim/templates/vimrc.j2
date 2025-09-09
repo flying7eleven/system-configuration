@@ -38,6 +38,13 @@ Plugin 'udalov/kotlin-vim' " a plugin for Kotlin syntax highlighting
 " All of your Plugins must be added before the following line
 call vundle#end()
 
+" ensure vim knows where to find fzf
+{% if ansible_system == "Darwin" %}
+set rtp+=/opt/homebrew/opt/fzf
+{% else %}
+set rtp+=/usr/bin/fzf
+{% endif %}
+
 " enable loading the indent file for specific file types
 filetype plugin indent on
 

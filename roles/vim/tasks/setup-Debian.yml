@@ -10,6 +10,7 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - exuberant-ctags
+    - fzf
     - git
     - vim
-    - exuberant-ctags
