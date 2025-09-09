@@ -33,3 +33,13 @@
     group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
   become: yes
   loop: "{{ users_to_configure }}"
+
+- name: Copy instructions for OpenAI Codex to the correct place.
+  ansible.builtin.copy:
+    src: "files/codex.instructions.md"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.codex/instructions.md"
+    mode: u=rw,g=r,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  loop: "{{ users_to_configure }}"

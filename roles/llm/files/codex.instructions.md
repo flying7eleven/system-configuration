@@ -1,0 +1,3 @@
+- use comments minimally, especially when inline 
+- adhere to any coding style guide configurations found
+- inline comments have an empty line above, and are on their own line
