@@ -1,0 +1,4 @@
+- name: Ensure claude-code is installed on the computer.
+  ansible.builtin.homebrew:
+    name: claude-code
+    state: present

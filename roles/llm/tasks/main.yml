@@ -1,0 +1,14 @@
+---
+- name: Running macOS specific setup.
+  include_tasks: setup-macOS.yml
+  when: ansible_os_family == 'Darwin'
+
+- name: Generating .claude.json.
+  ansible.builtin.template:
+    src: "templates/claude.json.j2"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.claude.json"
+    mode: u=rw,g=r,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  loop: "{{ users_to_configure }}"
