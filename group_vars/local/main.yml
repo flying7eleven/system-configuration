@@ -324,3 +324,9 @@ zsh_start_tmux_on_shell_init: False
 
 alacritty_theme: "catppuccin/catppuccin-macchiato"
 alacritty_font_size: 14.0
+
+llm_claude_user_id: "{{ vault_llm_claude_user_id }}"
+llm_claude_oauth_account_uuid: "{{ vault_llm_claude_oauth_account_uuid }}"
+llm_claude_oauth_account_email: "{{ vault_llm_claude_oauth_account_email }}"
+llm_claude_oauth_organization_uuid: "{{ vault_llm_claude_oauth_organization_uuid }}"
+llm_claude_oauth_organization_name: "{{ vault_llm_claude_oauth_organization_name }}"
