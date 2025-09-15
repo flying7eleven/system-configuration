@@ -11,11 +11,11 @@ set -g default-terminal "screen-256color"
 set -g @plugin 'jaclu/tmux-menus'
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-battery'
-# set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'MunifTanjim/tmux-mode-indicator'
 set -g @plugin 'flying7eleven/tmux-gitteam-indicator'
 
-#
+# configure the git-team indicator
 set -g @gitteam_status_indicator_color_enabled "#{@thm_green}"
 set -g @gitteam_status_indicator_color_disabled "#{@thm_red}"
 set -g @gitteam_status_indicator_icon ""
@@ -49,7 +49,7 @@ set -g renumber-windows on    # renumber windows when a window is closed
 #
 set -g @menus_trigger F12
 
-#
+# use 'u' for synchronizing the current panes
 bind u setw synchronize-panes
 
 # Load catppuccin
