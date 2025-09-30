@@ -286,6 +286,10 @@ zsh_aliases:
     alias: "gap"
     command: "git add -p"
 
+  - name: "Overwrite the vim command with nvim"
+    alias: "vim"
+    command: "nvim"
+
   - name: "Remove (parts of) files from the local changes"
     alias: "gcp"
     command: "git checkout -p"
