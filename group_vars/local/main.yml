@@ -322,6 +322,14 @@ zsh_aliases:
     alias: "gd"
     command: "git diff"
 
+  - name: "Create or attach to the work tmux session"
+    alias: "tmux_work"
+    command: "tmux new -s work"
+
+  - name: "Create or attach to the private tmux session"
+    alias: "tmux_private"
+    command: "tmux new -s private"
+
 zsh_enable_sdkman_support: True
 zsh_enable_nvm_support: True
 zsh_start_tmux_on_shell_init: False
