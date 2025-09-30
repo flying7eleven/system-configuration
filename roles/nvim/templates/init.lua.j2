@@ -1,0 +1,30 @@
+-- -------------------------------------------------------
+-- WARNING: This file is manged by an Ansible playbook.  -
+--          Do not edit it manually!                     -
+-- -------------------------------------------------------
+
+local vim = vim
+local Plug = vim.fn['plug#']
+
+vim.call('plug#begin')
+    Plug('bronson/vim-trailing-whitespace')                 --
+    Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })      -- Catppuccin color themes
+    Plug('gorodinskiy/vim-coloresque')                      -- CSS/LESS/SASS/HTML color preview for vim
+    Plug('ibhagwan/fzf-lua')                                --
+    Plug('lilydjwg/colorizer')                              -- Colorizing hex color codes
+    Plug('mg979/vim-visual-multi')                          --
+    Plug('nvim-lualine/lualine.nvim')                       --
+    Plug('nvim-tree/nvim-tree.lua')                         --
+    Plug('nvim-tree/nvim-web-devicons')                     --
+    Plug('stephpy/vim-yaml')                                -- YAML syntax highlighting
+    Plug('tpope/vim-fugitive')                              -- Integration of git into nvim
+vim.call('plug#end')
+
+--
+require("catppuccin").setup({
+    flavour = "macchiato",                                  -- latte, frappe, macchiato, mocha
+    transparent_background = true                           -- disables setting the background color and use the term instead
+})
+
+-- set the color theme but prepend it with 'silent!' to ignore errors when it's not yet installed
+vim.cmd('silent! colorscheme catppuccin')

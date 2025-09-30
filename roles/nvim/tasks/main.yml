@@ -1,0 +1,62 @@
+---
+- name: Running Debian specific setup
+  include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Running Arch Linux specific setup
+  include_tasks: setup-Arch.yml
+  when: ansible_os_family == 'Archlinux'
+
+- name: Running macOS specific setup
+  include_tasks: setup-macOS.yml
+  when: ansible_os_family == 'Darwin'
+
+- name: Ensure that the directories for the nvim configuration exists
+  file:
+    path: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.config/nvim"
+    state: directory
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Ensure that the directories for the nvim autoload plugins exists
+  file:
+    path: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.local/share/nvim/site/autoload"
+    state: directory
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Install init.lua file to the correct directory
+  ansible.builtin.template:
+    src: "templates/init.lua.j2"
+    dest: "~/.config/nvim/init.lua"
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Download vim-plug and place it in the autoload directory
+  get_url:
+    url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.local/share/nvim/site/autoload/plug.vim"
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Ensure all plugins are installed...
+  command: nvim +PlugInstall +qall
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"

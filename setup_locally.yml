@@ -8,4 +8,5 @@
     - { role: wine, when: ansible_os_family == 'Archlinux', tags: [ "wine" ] }
     - { role: tmux, tags: ["tmux"] }
     - { role: vim, tags: ["vim"] }
+    - { role: nvim, tags: ["nvim"] }
     - { role: zsh, tags: ["zsh"] }
