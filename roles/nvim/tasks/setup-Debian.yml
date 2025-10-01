@@ -4,6 +4,14 @@
     name: acl
     state: present
 
+- name: Ensure vim is not installed in parallel to neoVim.
+  become: yes
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - vim
+
 - name: Ensure neoVim and some additional tools are installed on the computer.
   become: yes
   ansible.builtin.apt:

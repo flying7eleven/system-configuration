@@ -1,3 +1,10 @@
+- name: Ensure vim is not installed in parallel to neoVim.
+  ansible.builtin.homebrew:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - vim
+
 - name: Ensure neoVim and some additional tools are installed on the computer.
   ansible.builtin.homebrew:
     name: "{{ item }}"
