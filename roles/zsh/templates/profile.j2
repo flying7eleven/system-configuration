@@ -14,4 +14,9 @@ export RUSTFLAGS="-L/opt/homebrew/opt/libpq/lib $RUSTFLAGS"
 
 # set the correct kerberos user globally
 export KERBEROS_USER={{ zsh_kerberos_username }}
+
+# since there is a default vim installation on macOS, map the default editor to nvim and alias vim to nvim
+# WARNING: this has to be installed by another role to make this work
+alias vim=/opt/homebrew/bin/nvim
+export EDITOR=/opt/homebrew/bin/nvim
 {% endif %}
