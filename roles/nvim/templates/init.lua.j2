@@ -7,20 +7,59 @@ local vim = vim
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
-    Plug('bronson/vim-trailing-whitespace')                 --
+    Plug('bronson/vim-trailing-whitespace')                 -- Highlight trailing whitespaces to make them easier to remove
     Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })      -- Catppuccin color themes
     Plug('gorodinskiy/vim-coloresque')                      -- CSS/LESS/SASS/HTML color preview for vim
-    Plug('ibhagwan/fzf-lua')                                --
+    Plug('ibhagwan/fzf-lua')                                -- Awesome fzf integration
     Plug('lilydjwg/colorizer')                              -- Colorizing hex color codes
-    Plug('mg979/vim-visual-multi')                          --
-    Plug('nvim-lualine/lualine.nvim')                       --
-    Plug('nvim-tree/nvim-tree.lua')                         --
-    Plug('nvim-tree/nvim-web-devicons')                     --
+    Plug('mg979/vim-visual-multi')                          -- An extended multicursor for nvim
+    Plug('nvim-lualine/lualine.nvim')                       -- A fast and configurable statusline plugin for nvim
+    Plug('nvim-tree/nvim-tree.lua')                         -- An tree view for browsing through your file system
+    Plug('nvim-tree/nvim-web-devicons')                     -- Some icons for the nvim-tree plugin
+    Plug('nvim-mini/mini.nvim')                             -- Another set of glyph icons to be used in nvims UI
+    Plug('folke/which-key.nvim')                            -- An easy way of showing which key to use in which mode
     Plug('stephpy/vim-yaml')                                -- YAML syntax highlighting
     Plug('tpope/vim-fugitive')                              -- Integration of git into nvim
 vim.call('plug#end')
 
---
+-- configure nvim-tree
+require("nvim-tree").setup({
+    sort = {
+        sorter = "case_sensitive",
+    },
+    view = {
+        width = 50,
+    },
+    renderer = {
+        group_empty = true,
+    },
+    filters = {
+        dotfiles = true,
+    },
+})
+
+-- configure the lualine plugin for being used as a top statusline
+require('lualine').setup {
+    options = {
+        globalstatus = true,
+    },
+    winbar = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {'filename'},
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+    },
+    sections = {},
+    inactive_sections = {},
+}
+vim.opt.laststatus = 0
+vim.opt.cmdheight = 0
+vim.opt.showmode = false
+vim.opt.ruler = false
+
+-- configure the theme which nvim uses
 require("catppuccin").setup({
     flavour = "macchiato",                                  -- latte, frappe, macchiato, mocha
     transparent_background = true                           -- disables setting the background color and use the term instead
