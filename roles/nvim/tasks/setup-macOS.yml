@@ -5,12 +5,14 @@
   with_items:
     - vim
 
+# we need to install `findutils` since the macOS default version is just broken and old
 - name: Ensure neoVim and some additional tools are installed on the computer.
   ansible.builtin.homebrew:
     name: "{{ item }}"
     state: present
   with_items:
     - ctags
+    - find
     - fzf
     - git
     - nvim
