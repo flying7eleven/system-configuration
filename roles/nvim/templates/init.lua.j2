@@ -65,5 +65,9 @@ require("catppuccin").setup({
     transparent_background = true                           -- disables setting the background color and use the term instead
 })
 
+-- enable spell checking and set the correct locale
+vim.opt.spell = true
+vim.opt.spelllang = "en_us"
+
 -- set the color theme but prepend it with 'silent!' to ignore errors when it's not yet installed
 vim.cmd('silent! colorscheme catppuccin')
