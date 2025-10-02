@@ -3,10 +3,10 @@
   roles:
     - { role: alacritty, tags: ["alacritty"] }
     - { role: llm, when: ansible_os_family == 'Darwin', tags: ["llm"] }
+    - { role: nvim, tags: ["nvim"] }
     - { role: sway, when: ansible_os_family != 'Darwin', tags: ["sway"] }
-    - { role: wireplumber, when: ansible_os_family != 'Darwin', tags: [ "wireplumber" ] }
-    - { role: wine, when: ansible_os_family == 'Archlinux', tags: [ "wine" ] }
     - { role: tmux, tags: ["tmux"] }
     - { role: vim, tags: ["vim"] }
-    - { role: nvim, tags: ["nvim"] }
+    - { role: wine, when: ansible_os_family == 'Archlinux', tags: [ "wine" ] }
+    - { role: wireplumber, when: ansible_os_family != 'Darwin', tags: [ "wireplumber" ] }
     - { role: zsh, tags: ["zsh"] }
