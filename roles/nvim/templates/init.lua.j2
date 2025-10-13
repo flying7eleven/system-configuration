@@ -9,15 +9,16 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin')
     Plug('bronson/vim-trailing-whitespace')                 -- Highlight trailing whitespaces to make them easier to remove
     Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })      -- Catppuccin color themes
+    Plug('folke/which-key.nvim')                            -- An easy way of showing which key to use in which mode
     Plug('gorodinskiy/vim-coloresque')                      -- CSS/LESS/SASS/HTML color preview for vim
     Plug('ibhagwan/fzf-lua')                                -- Awesome fzf integration
     Plug('lilydjwg/colorizer')                              -- Colorizing hex color codes
     Plug('mg979/vim-visual-multi')                          -- An extended multicursor for nvim
     Plug('nvim-lualine/lualine.nvim')                       -- A fast and configurable statusline plugin for nvim
+    Plug('nvim-mini/mini.nvim')                             -- Another set of glyph icons to be used in nvims UI
     Plug('nvim-tree/nvim-tree.lua')                         -- An tree view for browsing through your file system
     Plug('nvim-tree/nvim-web-devicons')                     -- Some icons for the nvim-tree plugin
-    Plug('nvim-mini/mini.nvim')                             -- Another set of glyph icons to be used in nvims UI
-    Plug('folke/which-key.nvim')                            -- An easy way of showing which key to use in which mode
+    Plug('ryanoasis/vim-devicons')                          -- Some nice looking icons for development in vim
     Plug('stephpy/vim-yaml')                                -- YAML syntax highlighting
     Plug('tpope/vim-fugitive')                              -- Integration of git into nvim
 vim.call('plug#end')
