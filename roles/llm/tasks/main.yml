@@ -13,6 +13,29 @@
   become: yes
   loop: "{{ users_to_configure }}"
 
+- name: Ensure that the directories for the Claude Code configuration exists.
+  file:
+    path: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.claude/agents"
+    state: directory
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
+- name: Copy sub-agents for Claude Code to the correct place.
+  ansible.builtin.copy:
+    src: "{{ item.1 }}"
+    dest: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item.0 }}/.claude/agents/{{ item.1 | basename }}"
+    mode: u=rw,g=r,o=
+    owner: "{{ item.0 }}"
+    group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item.0) }}"
+  become: yes
+  loop: "{{ users_to_configure | product(agent_files) | map('flatten') | list }}"
+  vars:
+    agent_files: "{{ lookup('fileglob', 'files/agents/*.md', wantlist=True) }}"
+
 - name: Ensure that the directories for the OpenAI Codex configuration exists.
   file:
     path: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.codex"
