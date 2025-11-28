@@ -1,23 +1,23 @@
 ---
 - name: Running Debian specific setup.
   include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
 
 - name: Running Arch Linux specific setup.
   include_tasks: setup-Arch.yml
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts['os_family'] == 'Archlinux'
 
 - name: Running macOS specific setup.
   include_tasks: setup-macOS.yml
-  when: ansible_os_family == 'Darwin'
+  when: ansible_facts['os_family'] == 'Darwin'
 
 - name: Ensure that the directories for the alacritty configuration exists.
   file:
-    path: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.config/alacritty"
+    path: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.config/alacritty"
     state: directory
     mode: u=rwx,g=rx,o=
     owner: "{{ item }}"
-    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+    group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item) }}"
   become: yes
   become_user: "{{ item }}"
   loop: "{{ users_to_configure }}"
@@ -25,7 +25,7 @@
 - name: Getting or updating catppuccin themes for alacritty.
   ansible.builtin.git:
     repo: https://github.com/catppuccin/alacritty.git
-    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.config/alacritty/catppuccin"
+    dest: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}//.config/alacritty/catppuccin"
     update: yes
     accept_hostkey: yes
   become: yes
@@ -35,9 +35,9 @@
 - name: Generating alacritty.toml.
   ansible.builtin.template:
     src: "templates/alacritty.toml.j2"
-    dest: "{{ (ansible_os_family == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.config/alacritty/alacritty.toml"
+    dest: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.config/alacritty/alacritty.toml"
     mode: u=rw,g=r,o=
     owner: "{{ item }}"
-    group: "{{ (ansible_os_family == 'Darwin') | ternary('staff', item) }}"
+    group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item) }}"
   become: yes
   loop: "{{ users_to_configure }}"
