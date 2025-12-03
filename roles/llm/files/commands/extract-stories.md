@@ -1,6 +1,7 @@
 ---
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
-description: Implement a user story which was already planed
+description: Extract user stories from an EPIC.
+argument-hint: [epic] [story_folder]
 ---
 
 ## Context
@@ -12,8 +13,7 @@ description: Implement a user story which was already planed
 - If you unsure, rather ask than guess.
 - The scope relates to the part of the project where the change was made (e.g. `backend`, `frontend`, etc.).
 - Use the detailed instructions in the `CLAUDE.md` file in the root directory of the repository.
-- Try to have only commits for one scope. Rather than affecting multiple scopes, make multiple commits for the changes.
 
 ## Your task
 
-Please implement the following user story: $ARGUMENTS
+I want to build a product which is described in @specs/product/vision.md for the product vision and @specs/product/glossary.md for the glossary. Please extract user stories from $1 and write them into the `$2` folder. Those stories should be detailed enough to be used for implementation. Try to use vertical slices for the stories. You can use all configured subagents and MCPs (like Playwright). If you have questions ask rather than guess.
