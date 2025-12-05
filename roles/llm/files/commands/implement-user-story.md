@@ -28,6 +28,7 @@ description: Implement a user story which was already planned
 
 - If you are unsure about requirements, ask rather than guess
 - Follow conventions in `CLAUDE.md`
+- If you gain new knowledge during implementation (e.g., gotchas, undocumented behaviors, useful patterns), persist it to `CLAUDE.md` under an appropriate section
 
 ## Your Task
 
