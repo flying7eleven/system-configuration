@@ -19,7 +19,7 @@ description: Validate the current implementation against the documentation.
     - System overview: @specs/product/architecture/system-overview.md
 - Project conventions: @CLAUDE.md
 - Existing EPICs: @specs/planning/epics/
-- User stories: @specs/planning/stories/
+- User stories: @specs/planning/stories/{epic-name}
 
 **Important:** If product vision or glossary files are missing, stop and ask the user to initialize the documentation first.
 

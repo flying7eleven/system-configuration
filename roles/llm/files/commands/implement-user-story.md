@@ -20,15 +20,16 @@ description: Implement a user story which was already planned
     - System overview: @specs/product/architecture/system-overview.md
 - Project conventions: @CLAUDE.md
 - EPICS are stored in @specs/planning/epics
-- Stories are stored in @specs/planning/stories
+- Stories are stored in @specs/planning/stories/{epic-name}
 
 **Important:** If any of the above files are missing, stop and ask the user to initialize the documentation first.
 
 ### Guidelines
 
 - If you are unsure about requirements, ask rather than guess
-- Follow conventions in `CLAUDE.md`
-- If you gain new knowledge during implementation (e.g., gotchas, undocumented behaviors, useful patterns), persist it to `CLAUDE.md` under an appropriate section
+- Follow conventions in @CLAUDE.md
+- Follow the code style guid in @STYLE.md, if the file exists
+- If you gain new knowledge during implementation (e.g., gotchas, undocumented behaviors, useful patterns), persist it to @CLAUDE.md under an appropriate section
 
 ## Your Task
 

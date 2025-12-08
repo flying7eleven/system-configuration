@@ -20,7 +20,7 @@ description: Write a detailed EPIC for a new feature.
     - System overview: @specs/product/architecture/system-overview.md
 - Project conventions: @CLAUDE.md
 - Existing EPICs: @specs/planning/epics/
-- Existing Stories: @specs/planning/stories/
+- User stories: @specs/planning/stories/{epic-name}
 
 **Important:** If product vision or glossary files are missing, stop and ask the user to initialize the documentation first.
 
