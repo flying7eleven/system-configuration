@@ -30,6 +30,7 @@ argument-hint: <epic>
 - Review existing EPICs and stories for style consistency before writing
 - Use the TodoWrite tool to track your progress
 - Never put actual implementation into the story (extracting stories is not part of implementing them)
+- Always ensure the stories contain tasks for write tests for the code in the appropriate testing framework.
 
 ## Arguments
 
