@@ -94,27 +94,17 @@ So that **{benefit/value}**
 
 ---
 
-## Technical Implementation
-
-### {Component/Layer Name}
-
-**File:** `{path/to/file.ext}`
-
-{Code snippets, interface definitions, SQL schemas, or implementation guidance as appropriate}
-
----
-
 ## Dependencies
 
 ### Blocking
 
-- {Stories or tasks that must be completed first}
+- {User stories or tasks that must be completed first}
 
-### Blocked Stories
+### Blocked user stories
 
 This story blocks:
 
-- {Stories that depend on this one}
+- {User stories that depend on this one}
 
 ---
 
@@ -172,7 +162,6 @@ This story blocks:
 ### Section Guidelines
 
 - **Context**: Always include - explains the "why" and current state
-- **Technical Implementation**: Include code snippets for complex stories; can be brief for simple UI changes
 - **Testing Strategy**: Always include manual checklist; add automated tests for backend/complex logic
 - **Notes**: Use for edge cases, implementation order, design rationale
 
@@ -189,10 +178,9 @@ This story blocks:
 3. For each story:
     - Write a complete story file following the format above
     - Ensure acceptance criteria are specific and testable
-    - Note dependencies between stories
-    - No actual implementation code or testing code in the stories
+    - Note dependencies between user stories
     - Defined test cases to be implemented in the story
-4. Create a `_index.md` in the story folder listing all stories with a brief summary and suggested implementation order
-5. Present a summary of extracted stories to the user for review
+4. Create a `_index.md` in the story folder listing all user stories with a brief summary and suggested implementation order
+5. Present a summary of extracted user stories to the user for review
 
-If anything in the EPIC is ambiguous, ask for clarification before creating stories.
+If anything in the EPIC is ambiguous, ask for clarification before creating user stories.
