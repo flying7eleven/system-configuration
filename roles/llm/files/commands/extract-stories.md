@@ -29,6 +29,7 @@ argument-hint: <epic>
 - Follow conventions in @CLAUDE.md
 - Review existing EPICs and stories for style consistency before writing
 - Use the TodoWrite tool to track your progress
+- Never put actual implementation into the story (extracting stories is not part of implementing them)
 
 ## Arguments
 

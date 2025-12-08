@@ -14,11 +14,6 @@ description: Prepare the project for release
 - Existing EPICs: @specs/planning/epics/
 - Current changelog: @CHANGELOG.md
 
-### Guidelines
-
-Prepare the project for the release.
-Therefore, create or update the CHANGELOG.md in the root folder of the repository.
-
 #### Finding the Last Release
 
 To find commits since the last tagged release (tagged with `year.month.day` format):
@@ -144,3 +139,9 @@ Update the version numbers of all components to the current date in the format `
 - **No tags exist:** Treat this as the first release; include relevant commits or start with an empty changelog
 - **No version files found:** Skip the version update step and note this in your response
 - **Lockfile update fails:** Report the error but continue with other tasks
+
+## Your Task
+
+Prepare the project for the release.
+Therefore, create or update the CHANGELOG.md in the root folder of the repository.
+After generating the changelog and updating the version numbers, try to build the docker containers which are mentioned in @.github/workflows/docker-release.yml
