@@ -12,6 +12,7 @@ description: Prepare the project for release
 - Glossary: @specs/product/glossary.md
 - Project conventions: @CLAUDE.md
 - Existing EPICs: @specs/planning/epics/
+- User stories: @specs/planning/stories/{epic-name}
 - Current changelog: @CHANGELOG.md
 
 #### Finding the Last Release
@@ -33,9 +34,11 @@ To find commits since the last tagged release (tagged with `year.month.day` form
 #### Getting the Repository URL
 
 To generate correct commit links, determine the repository URL:
+
 ```bash
 git remote get-url origin
 ```
+
 Transform the URL to the web format (e.g., `https://github.com/<owner>/<repo>/commit/`).
 
 #### Changelog Format
@@ -89,11 +92,11 @@ When there are many commits or complex feature work spanning multiple domains, u
 
 **Available subagents for release analysis:**
 
-| Subagent | When to Use |
-|----------|-------------|
-| `backend-developer` | Many backend commits (API changes, database migrations, server-side logic) |
-| `frontend-developer` | Many frontend commits (UI components, styling, client-side features) |
-| `architect-reviewer` | Significant architectural changes or cross-cutting concerns |
+| Subagent             | When to Use                                                                |
+|----------------------|----------------------------------------------------------------------------|
+| `backend-developer`  | Many backend commits (API changes, database migrations, server-side logic) |
+| `frontend-developer` | Many frontend commits (UI components, styling, client-side features)       |
+| `architect-reviewer` | Significant architectural changes or cross-cutting concerns                |
 
 **How to use subagents:**
 
@@ -113,6 +116,7 @@ When there are many commits or complex feature work spanning multiple domains, u
    ```
 
 **Best practices:**
+
 - Only use subagents when there are 5+ related commits that need consolidation
 - Provide the subagent with commit hashes and file paths for context
 - Ask for a concise, user-facing summary suitable for the changelog
@@ -123,12 +127,15 @@ When there are many commits or complex feature work spanning multiple domains, u
 Update the version numbers of all components to the current date in the format `year.month.day` (e.g., `2025.12.5`).
 
 **Discovering components to update:**
+
 1. Search for `package.json` files (Node.js/frontend projects)
 2. Search for `Cargo.toml` files (Rust projects)
 3. Search for `pyproject.toml` or `setup.py` files (Python projects)
-4. Check the project's CLAUDE.md or README for project-specific conventions
+4. Search for `CMakeLists.txt` (C++ projects)
+5. Check the project's CLAUDE.md or README for project-specific conventions
 
 **After updating versions, update lockfiles:**
+
 - For `package.json`: Run `npm i` to update `package-lock.json`
 - For `Cargo.toml`: Run `cargo build` to update `Cargo.lock`
 - Only run these commands if the corresponding manifest file exists
@@ -144,4 +151,5 @@ Update the version numbers of all components to the current date in the format `
 
 Prepare the project for the release.
 Therefore, create or update the CHANGELOG.md in the root folder of the repository.
-After generating the changelog and updating the version numbers, try to build the docker containers which are mentioned in @.github/workflows/docker-release.yml
+After generating the changelog and updating the version numbers, try to build the docker containers if there is a @.github/workflows/docker-release.yml
+Create a git tag with the version number of the release and the commit message for the tag with the content of the changelog for the current (new) version.
