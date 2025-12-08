@@ -29,8 +29,6 @@ argument-hint: <epic>
 - Follow conventions in @CLAUDE.md
 - Review existing EPICs and stories for style consistency before writing
 - Use the TodoWrite tool to track your progress
-- Never put actual implementation into the story (extracting stories is not part of implementing them)
-- Always ensure the stories contain tasks for write tests for the code in the appropriate testing framework.
 
 ## Arguments
 
@@ -192,6 +190,8 @@ This story blocks:
     - Write a complete story file following the format above
     - Ensure acceptance criteria are specific and testable
     - Note dependencies between stories
+    - No actual implementation code or testing code in the stories
+    - Defined test cases to be implemented in the story
 4. Create a `_index.md` in the story folder listing all stories with a brief summary and suggested implementation order
 5. Present a summary of extracted stories to the user for review
 
