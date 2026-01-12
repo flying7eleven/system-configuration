@@ -37,7 +37,11 @@ style = "Regular"
 history = 100000
 
 [window]
+{% if ansible_facts["os_family"] == 'Darwin' %}
 opacity = 1.0
+{% else %}
+opacity = 0.7
+{% endif %}
 option_as_alt = "None"
 startup_mode = "Maximized"
 
