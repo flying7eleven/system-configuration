@@ -5,6 +5,10 @@
 
 [env]
 TERM = "xterm-256color"
+{% if ansible_facts["os_family"] == 'Darwin' %}
+LC_CTYPE = "en_US.UTF-8"
+LANG = "en_US.UTF-8"
+{% endif %}
 
 [font]
 size = {{ alacritty_font_size }}
@@ -33,7 +37,7 @@ style = "Regular"
 history = 100000
 
 [window]
-opacity = 0.8
+opacity = 1.0
 option_as_alt = "None"
 startup_mode = "Maximized"
 
