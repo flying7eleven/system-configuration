@@ -12,7 +12,7 @@
     state: present
   with_items:
     - ctags
-    - find
     - fzf
     - git
     - nvim
+    - uutils-findutils

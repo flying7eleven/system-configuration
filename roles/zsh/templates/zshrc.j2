@@ -24,11 +24,11 @@ HIST_STAMPS="dd.mm.yyyy"
 
 # plugins to load
 plugins=(
-{% if ansible_system == "Darwin" %}
+{% if ansible_facts["system"] == "Darwin" %}
     1password
 {% endif %}
     ansible
-{% if ansible_system == "Darwin" %}
+{% if ansible_facts["system"] == "Darwin" %}
     brew
 {% endif %}
     command-not-found
@@ -37,7 +37,7 @@ plugins=(
     docker-compose
     fzf
     git
-{% if ansible_system == "Darwin" %}
+{% if ansible_facts["system"] == "Darwin" %}
     macos
 {% endif %}
     nmap
@@ -88,7 +88,7 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
 fi
 {% endif %}
 
-{% if ansible_system == "Darwin" %}
+{% if ansible_facts["system"] == "Darwin" %}
 # configure the scripts which are able to get the corresponding entries from the installed password manager
 export ANSIBLE_VAULT_PASSWORD_FILE=$HOME/.ansible_vault_pass.sh
 export ANSIBLE_BECOME_PASSWORD_FILE=$HOME/.ansible_become_pass.sh

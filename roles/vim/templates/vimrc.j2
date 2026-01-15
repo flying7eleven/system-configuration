@@ -39,7 +39,7 @@ Plugin 'udalov/kotlin-vim' " a plugin for Kotlin syntax highlighting
 call vundle#end()
 
 " ensure vim knows where to find fzf
-{% if ansible_system == "Darwin" %}
+{% if ansible_facts["system"] == "Darwin" %}
 set rtp+=/opt/homebrew/opt/fzf
 {% else %}
 set rtp+=/usr/bin/fzf
