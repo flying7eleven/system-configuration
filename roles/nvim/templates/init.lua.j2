@@ -11,33 +11,31 @@ vim.call('plug#begin')
     Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })      -- Catppuccin color themes
     Plug('folke/which-key.nvim')                            -- An easy way of showing which key to use in which mode
     Plug('gorodinskiy/vim-coloresque')                      -- CSS/LESS/SASS/HTML color preview for vim
+    Plug('hrsh7th/cmp-buffer')                              -- TODO
+    Plug('hrsh7th/cmp-nvim-lsp')                            -- cmp LSP completion
+    Plug('hrsh7th/cmp-path')                                -- cmp path completion
+    Plug('hrsh7th/cmp-vsnip')                               -- cmp snippet completion
+    Plug('hrsh7th/nvim-cmp')                                -- TODO
     Plug('ibhagwan/fzf-lua')                                -- Awesome fzf integration
     Plug('lilydjwg/colorizer')                              -- Colorizing hex color codes
     Plug('mg979/vim-visual-multi')                          -- An extended multicursor for nvim
+    Plug('neovim/nvim-lspconfig')                           -- TODO
     Plug('nvim-lualine/lualine.nvim')                       -- A fast and configurable statusline plugin for nvim
     Plug('nvim-mini/mini.nvim')                             -- Another set of glyph icons to be used in nvims UI
-    Plug('nvim-tree/nvim-tree.lua')                         -- An tree view for browsing through your file system
     Plug('nvim-tree/nvim-web-devicons')                     -- Some icons for the nvim-tree plugin
+    Plug('preservim/nerdtree')                              -- An tree view for browsing through your file system
     Plug('ryanoasis/vim-devicons')                          -- Some nice looking icons for development in vim
     Plug('stephpy/vim-yaml')                                -- YAML syntax highlighting
     Plug('tpope/vim-fugitive')                              -- Integration of git into nvim
+    Plug('mrcjkb/rustaceanvim')                             -- TODO
 vim.call('plug#end')
 
--- configure nvim-tree
-require("nvim-tree").setup({
-    sort = {
-        sorter = "case_sensitive",
-    },
-    view = {
-        width = 50,
-    },
-    renderer = {
-        group_empty = true,
-    },
-    filters = {
-        dotfiles = true,
-    },
-})
+
+-- configure NERDTree
+-- vim.keymap.set('n', '<leader>n', ':NERDTreeFocus<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-n>', ':NERDTree<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-t>', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-f>', ':NERDTreeFind<CR>', { noremap = true, silent = true })
 
 -- configure the lualine plugin for being used as a top statusline
 require('lualine').setup {
