@@ -76,6 +76,9 @@ alias {{ alias.alias }}="{{ alias.command }}"
 # FIX for commit signing
 export GPG_TTY=$(tty)
 
+# FIX for better UI rendering in Claude Code
+export ENABLE_INCREMENTAL_TUI=true
+
 {% if zsh_start_tmux_on_shell_init is defined and zsh_start_tmux_on_shell_init %}
 ####################################################################################
 ############################# start tmux automatically #############################
