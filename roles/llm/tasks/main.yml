@@ -35,6 +35,17 @@
   become_user: "{{ item }}"
   loop: "{{ users_to_configure }}"
 
+- name: Ensure that the directories for the Claude Code skills exists.
+  file:
+    path: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.claude/skills"
+    state: directory
+    mode: u=rwx,g=rx,o=
+    owner: "{{ item }}"
+    group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  become_user: "{{ item }}"
+  loop: "{{ users_to_configure }}"
+
 - name: Copy sub-agents for Claude Code to the correct place.
   ansible.builtin.copy:
     src: "{{ item.1 }}"
@@ -58,6 +69,18 @@
   loop: "{{ users_to_configure | product(agent_files) | map('flatten') | list }}"
   vars:
     agent_files: "{{ lookup('fileglob', 'files/commands/*.md', wantlist=True) }}"
+
+- name: Copy skills folders for Claude Code to the correct place.
+  ansible.builtin.copy:
+    src: "files/skills/{{ item.1 }}"
+    dest: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item.0 }}/.claude/skills/{{ item.1 }}"
+    mode: u=rwX,g=rX,o=
+    owner: "{{ item.0 }}"
+    group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item.0) }}"
+  become: yes
+  loop: "{{ users_to_configure | product(skill_folders) | map('flatten') | list }}"
+  vars:
+    skill_folders: "{{ lookup('pipe', 'cd ' + role_path + ' && find files/skills -mindepth 1 -maxdepth 1 -type d -exec basename {} \\;').splitlines() }}"
 
 - name: Ensure that the directories for the OpenAI Codex configuration exists.
   file:
