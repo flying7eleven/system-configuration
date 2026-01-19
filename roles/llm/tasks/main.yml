@@ -73,7 +73,7 @@
 - name: Copy skills folders for Claude Code to the correct place.
   ansible.builtin.copy:
     src: "files/skills/{{ item.1 }}"
-    dest: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item.0 }}/.claude/skills/{{ item.1 }}"
+    dest: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item.0 }}/.claude/skills/"
     mode: u=rwX,g=rX,o=
     owner: "{{ item.0 }}"
     group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item.0) }}"
