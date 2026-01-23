@@ -9,7 +9,11 @@ Goal: Analyze staged git changes and generate a commit message following the pat
 
 The user input to you can be provided directly by the agent or as a command argument - you **MUST** consider it before proceeding with the prompt (if not empty).
 
-You **MUST** always use the text form for the emojis in the commit message (e.g., `:sparkles:` instead of the unicode character emoji ✨).
+You **MUST** always use the text form for the emojis in the commit message (e.g., `:sparkles:` instead of the Unicode character emoji ✨).
+
+Always use the users' GPG key for signing commits. If this fails, ask the user to provide the GPG key and unlock it so that the commit can be signed.
+
+You **MUST** never use the `--no-gpg-sign` without user confirmation.
 
 User input:
 
