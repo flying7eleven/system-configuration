@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+SESSION="private"
+
+# Check if session already exists
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+    echo "Session '$SESSION' already exists. Attaching..."
+    exec tmux attach-session -t "$SESSION"
+fi
+
+# Create the requested windows
+tmux new-session -d -s "$SESSION" -n "home" -c "$HOME"
+tmux new-window -t "$SESSION" -n "adelie" -c "$HOME/Private/dev/adelie"
+tmux new-window -t "$SESSION" -n "qwen-finetune" -c "$HOME/Private/dev/qwen-fine-tuner/"
+
+# Attach to session
+tmux select-window -t "$SESSION:1"
+exec tmux attach-session -t "$SESSION"

@@ -21,6 +21,25 @@
   become: yes
   loop: "{{ users_to_configure }}"
 
+- name: Install the work tmux helper for the user.
+  ansible.builtin.copy:
+    src: files/tmux-work.sh
+    dest: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.tmux-work.sh"
+    owner: "{{ item }}"
+    group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  loop: "{{ users_to_configure }}"
+  when: ansible_facts['os_family'] == 'Darwin'
+
+- name: Install the private tmux helper for the user.
+  ansible.builtin.template:
+    src: "templates/tmux-private.sh.j2"
+    dest: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.tmux-private.sh"
+    owner: "{{ item }}"
+    group: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('staff', item) }}"
+  become: yes
+  loop: "{{ users_to_configure }}"
+
 - name: Ensure that the directories for the tmux themes exists.
   file:
     path: "{{ (ansible_facts['os_family'] == 'Darwin') | ternary('/Users/', '/home/') }}{{ item }}/.tmux/themes"

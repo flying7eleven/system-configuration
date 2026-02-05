@@ -323,12 +323,12 @@ zsh_aliases:
     command: "git diff"
 
   - name: "Create or attach to the work tmux session"
-    alias: "tmux_work"
-    command: "tmux new -s work"
+    alias: "tw"
+    command: "$HOME/.tmux-work.sh"
 
   - name: "Create or attach to the private tmux session"
-    alias: "tmux_private"
-    command: "tmux new -s private"
+    alias: "tp"
+    command: "$HOME/.tmux-private.sh"
 
 zsh_enable_sdkman_support: True
 zsh_enable_nvm_support: True
