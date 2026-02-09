@@ -11,7 +11,12 @@ fi
 # Create the requested windows
 tmux new-session -d -s "$SESSION" -n "home" -c "$HOME"
 tmux new-window -t "$SESSION" -n "adelie" -c "$HOME/Private/dev/adelie"
-tmux new-window -t "$SESSION" -n "qwen-finetune" -c "$HOME/Private/dev/qwen-fine-tuner/"
+tmux new-window -t "$SESSION" -n "adelie-specs" -c "$HOME/Private/dev/adelie-specs"
+tmux new-window -t "$SESSION" -n "flyg-specs" -c "$HOME/Private/dev/flyg-specs"
+tmux new-window -t "$SESSION" -n "minne" -c "$HOME/Private/dev/minne"
+tmux new-window -t "$SESSION" -n "nota" -c "$HOME/Private/dev/nota"
+tmux new-window -t "$SESSION" -n "minchoigeartu" -c "$HOME/Private/dev/minchoigeartu"
+tmux new-window -t "$SESSION" -n "minchoigeartu" -c "$HOME/Private/dev/minchoigeartu"
 
 # Attach to session
 tmux select-window -t "$SESSION:1"
