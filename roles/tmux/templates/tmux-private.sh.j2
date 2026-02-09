@@ -10,13 +10,25 @@ fi
 
 # Create the requested windows
 tmux new-session -d -s "$SESSION" -n "home" -c "$HOME"
+{% if ansible_facts["os_family"] == 'Darwin' %}
 tmux new-window -t "$SESSION" -n "adelie" -c "$HOME/Private/dev/adelie"
 tmux new-window -t "$SESSION" -n "adelie-specs" -c "$HOME/Private/dev/adelie-specs"
 tmux new-window -t "$SESSION" -n "flyg-specs" -c "$HOME/Private/dev/flyg-specs"
+tmux new-window -t "$SESSION" -n "comhartha" -c "$HOME/Private/dev/comhartha"
 tmux new-window -t "$SESSION" -n "minne" -c "$HOME/Private/dev/minne"
 tmux new-window -t "$SESSION" -n "nota" -c "$HOME/Private/dev/nota"
 tmux new-window -t "$SESSION" -n "minchoigeartu" -c "$HOME/Private/dev/minchoigeartu"
-tmux new-window -t "$SESSION" -n "minchoigeartu" -c "$HOME/Private/dev/minchoigeartu"
+tmux new-window -t "$SESSION" -n "system-configuration" -c "$HOME/Private/dev/system-configuration"
+{% else %}
+tmux new-window -t "$SESSION" -n "adelie" -c "$HOME/dev/adelie"
+tmux new-window -t "$SESSION" -n "adelie-specs" -c "$HOME/dev/adelie-specs"
+tmux new-window -t "$SESSION" -n "flyg-specs" -c "$HOME/dev/flyg-specs"
+tmux new-window -t "$SESSION" -n "comhartha" -c "$HOME/dev/comhartha"
+tmux new-window -t "$SESSION" -n "minne" -c "$HOME/dev/minne"
+tmux new-window -t "$SESSION" -n "nota" -c "$HOME/dev/nota"
+tmux new-window -t "$SESSION" -n "minchoigeartu" -c "$HOME/dev/minchoigeartu"
+tmux new-window -t "$SESSION" -n "system-configuration" -c "$HOME/dev/system-configuration"
+{% endif %}
 
 # Attach to session
 tmux select-window -t "$SESSION:1"
