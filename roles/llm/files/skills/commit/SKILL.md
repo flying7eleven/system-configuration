@@ -1,6 +1,7 @@
 ---
 name: commit
 description: Create a git commit following the project's gitmoji workflow with verification. Use when (1) user wants to commit staged changes, (2) user invokes /commit command, (3) user asks to create a commit. Triggers on "commit", "git commit", "create commit", "stage and commit".
+allowed-tools: Bash, Read, Write, Edit, Glob, Grep, AskUserQuestion, Skill
 ---
 
 # Commit Skill
