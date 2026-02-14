@@ -46,6 +46,11 @@ Any text that matches a version-like pattern (`X.Y.Z` for semver, or `YYYY.MM.DD
 2. If no previous tag exists, run `git log --pretty=format:"%H %s"` to get all commits
 3. If there are **no commits** since the last release, inform the user and stop
 4. Display a summary: "Found N commits since last release (TAG)"
+5. **Determine the GitHub repository URL** for commit links:
+   - Run `git remote get-url origin` to get the remote URL
+   - Convert SSH URLs (e.g., `git@github.com:owner/repo.git`) to HTTPS form: `https://github.com/owner/repo`
+   - Strip any trailing `.git` suffix from HTTPS URLs
+   - Store this as the base URL for constructing commit links in the changelog (e.g., `<base-url>/commit/<full-hash>`)
 
 ## Step 3: Determine the Release Version
 
@@ -96,7 +101,8 @@ When categorizing:
 - Strip the gitmoji prefix (both Unicode emoji and `:code:` form) from the commit message for the changelog entry
 - Strip conventional commit prefixes (e.g., `fix:`, `feat(scope):`) from the message
 - Clean up the message to read naturally as a changelog bullet point
-- Omit the commit hash from the changelog entry
+- **Keep the full commit hash** associated with each entry for generating commit links
+- Derive a **short hash** (first 7 characters) from the full hash for display in the changelog
 
 ## Step 5: Generate CHANGELOG Content
 
@@ -116,14 +122,19 @@ Generate a changelog entry following the [Keep a Changelog](https://keepachangel
 ## [X.Y.Z] - YYYY-MM-DD
 
 ### Added
-- Description of added feature
-- Another added feature
+- Description of added feature ([abc1234])
+- Another added feature ([def5678])
 
 ### Changed
-- Description of change
+- Description of change ([ghi9012])
 
 ### Fixed
-- Description of fix
+- Description of fix ([jkl3456])
+
+[abc1234]: https://github.com/owner/repo/commit/abc1234abc1234abc1234abc1234abc1234abc1234
+[def5678]: https://github.com/owner/repo/commit/def5678def5678def5678def5678def5678def5678
+[ghi9012]: https://github.com/owner/repo/commit/ghi9012ghi9012ghi9012ghi9012ghi9012ghi9012
+[jkl3456]: https://github.com/owner/repo/commit/jkl3456jkl3456jkl3456jkl3456jkl3456jkl3456
 ```
 
 **Rules:**
@@ -132,6 +143,9 @@ Generate a changelog entry following the [Keep a Changelog](https://keepachangel
 - Each entry should be a concise, human-readable description
 - Start each entry with an uppercase letter
 - Don't end entries with a period
+- Append the short commit hash as a Markdown reference-style link suffix to each entry: `([short-hash])`
+- Collect all reference link definitions at the **bottom of the release section** (after all category subsections), one per line: `[short-hash]: <base-url>/commit/<full-hash>`
+- Use the GitHub repository URL determined in Step 2 as the base URL
 
 **Full file structure (for new files):**
 
@@ -149,7 +163,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [X.Y.Z] - YYYY-MM-DD
 
 ### Added
-- ...
+- Description of feature ([abc1234])
+
+[abc1234]: https://github.com/owner/repo/commit/abc1234...
 ```
 
 If using CalVer:
@@ -166,7 +182,9 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 ## [YYYY.MM.DD] - YYYY-MM-DD
 
 ### Added
-- ...
+- Description of feature ([abc1234])
+
+[abc1234]: https://github.com/owner/repo/commit/abc1234...
 ```
 
 ## Step 6: Update Project Version in Manifest Files
