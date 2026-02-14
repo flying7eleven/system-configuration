@@ -197,9 +197,24 @@ After generating the changelog, update the version field in any detected project
 | **npm** | `package.json` | `"version": "X.Y.Z"` | Edit the top-level `"version"` field |
 | **Yarn/npm** | `package-lock.json` | `"version": "X.Y.Z"` | Edit the top-level `"version"` field (the root package entry). If it exists, it must stay in sync with `package.json` |
 | **Yarn** | `yarn.lock` | No version field | Do **not** edit - Yarn lock files don't contain a project version |
+| **C++** | `CMakeLists.txt` | `project(... VERSION X.Y.Z ...)` | See C++ detection rules below |
+
+### C++ version detection
+
+C++ projects may define their version in several ways. Search for version definitions in the following order:
+
+1. **`CMakeLists.txt` (root)**: Look for a `project()` command with a `VERSION` keyword, e.g., `project(MyApp VERSION 1.2.3)`. Update the version number in that `VERSION` argument.
+2. **`CMakeLists.txt` (root)**: If no `VERSION` in `project()`, look for a `set()` command that defines a version variable, e.g., `set(PROJECT_VERSION "1.2.3")`, `set(MY_PROJECT_VERSION "1.2.3")`, or `set(CMAKE_PROJECT_VERSION "1.2.3")`. Update the version string in the matching `set()` call.
+3. **Subdirectory `CMakeLists.txt`**: If the root `CMakeLists.txt` does not contain a version, use Glob to search for `**/CMakeLists.txt` and check each for a `project(... VERSION ...)` or version-setting `set()` command. Only update files that define a project-level version.
+4. **`vcpkg.json`**: If present in the repository root, update the top-level `"version-string"` or `"version"` field.
+5. **`conanfile.py` / `conanfile.txt`**: If `conanfile.py` exists, update the `version = "X.Y.Z"` attribute in the class. If `conanfile.txt` exists, update the version in the `[requires]` section only if it refers to the project itself (not dependencies).
+
+When updating `CMakeLists.txt`:
+- Only update the version number itself, preserve all surrounding CMake syntax and formatting
+- If the version is split across multiple `set()` calls (e.g., `set(VERSION_MAJOR 1)`, `set(VERSION_MINOR 2)`, `set(VERSION_PATCH 3)`), update each component individually to match the new release version
 
 **Detection rules:**
-1. Use Glob to check which of these files exist in the repository root
+1. Use Glob to check which of these files exist in the repository root (and subdirectories for C++ projects)
 2. Only update files that are found - skip silently if a manifest doesn't exist
 3. If **multiple** manifests exist (e.g., a Rust project with a `package.json` for tooling), update **all** of them
 4. If **no** manifest files are found, skip this step silently
@@ -208,6 +223,7 @@ After generating the changelog, update the version field in any detected project
 - Read the file first, then use Edit to change only the version field
 - For `Cargo.toml`: only update the `version` under `[package]`, not workspace or dependency versions
 - For `package.json` / `package-lock.json`: only update the top-level `"version"` key, not nested dependency versions
+- For `CMakeLists.txt`: only update the project version, not dependency versions or unrelated version variables
 - Preserve all other content and formatting exactly as-is
 - If a `Cargo.lock` exists and `Cargo.toml` was updated, run `cargo update --workspace` to regenerate it (so the lock file stays in sync)
 
@@ -233,7 +249,7 @@ After generating the changelog, update the version field in any detected project
 1. Write the updated CHANGELOG.md to disk (using Write or Edit tool)
 2. Stage **all** release-related files:
    - `git add CHANGELOG.md`
-   - Stage any manifest files that were updated in Step 6 (e.g., `git add Cargo.toml`, `git add package.json package-lock.json`)
+   - Stage any manifest files that were updated in Step 6 (e.g., `git add Cargo.toml`, `git add package.json package-lock.json`, `git add CMakeLists.txt`, `git add vcpkg.json`, `git add conanfile.py`)
    - If `Cargo.lock` was regenerated, stage it too: `git add Cargo.lock`
 3. Use the `/commit` skill to commit the staged changes by invoking the Skill tool with `skill: "commit"` and passing the following as args: `--emoji :bookmark: Release X.Y.Z`
    - The `:bookmark:` emoji is the standard gitmoji for release/version tags
